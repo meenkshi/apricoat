@@ -1,0 +1,181 @@
+ {% if product.metafields.custom.all_weather_mobile_image2 != blank or product.metafields.custom.all_weather_mobile_image1 !=blank or product.metafields.custom.all_weather_desktop_image1 !=blank or product.metafields.custom.all_weather_desktop_image2 !=blak %}
+   <div class="product_image_text_slider">
+  <div class="page-width">
+    <div class="grid">
+      <div class="column-12">
+        {% if section.settings.content != blank %}
+          <h2 class="demo">{{ section.settings.content }}</h2>
+        {% endif %}
+      </div>
+      <div class="column-12">
+        <div class="container">
+          <div id="comparison">
+            <figure>
+              <div id="handle">
+                {% render 'slider-arrows' %}
+              </div>
+              <div id="divisor"></div>
+              <div id="mob_handle">
+                {% render 'slider-arrows' %}
+              </div>
+              <div id="mob_divisor"></div>
+            </figure>
+            <input type="range" min="4" max="96" value="50" id="slider" oninput="moveDivisor()">
+            <input type="range" min="8" max="93" value="50" id="mob_slider" oninput="moveDivisor()">
+          </div>         
+          
+        </div>
+      </div>
+            
+    </div>
+  </div>
+</div>
+  {% endif %}
+<style>
+      .container {
+      max-width: 980px;
+        margin: 0 auto;
+    }
+
+    #comparison ,#mob_comparison{
+    	width: 100%;
+/*     	    height: 545px;  */
+      padding-bottom: 55.7%;
+      border-radius: 20px;
+    	overflow: hidden;
+      position: relative;
+    }
+
+    figure {
+      position: absolute;
+    	background-image: url({{product.metafields.custom.all_weather_desktop_image1 | img_url: 'master' }});
+    	background-size: cover;
+    	font-size: 0;
+    	width: 100%;
+    	height: 100%;
+    	margin: 0;
+    }
+
+    #divisor , #mob_divisor{
+    	background-image: url({{product.metafields.custom.all_weather_desktop_image2 | img_url: 'master' }});
+    	background-size: cover;
+    	position: absolute;
+    	width: 50%;
+    	box-shadow: 0 5px 10px -2px rgba(0,0,0,0.3);
+    	bottom: 0; height: 100%;
+/*       border-right: 11px solid #F5F5F5; */
+  }
+   
+           @media(max-width:767px){
+             {% if product.metafields.custom.all_weather_mobile_image1 !=blank %}
+           figure {   background-image: url({{product.metafields.custom.all_weather_mobile_image1 | img_url: 'master' }});    }
+             {% endif %}
+             {% if product.metafields.custom.all_weather_mobile_image2 !=blank %}
+          #divisor, #mob_divisor{ background-image: url({{product.metafields.custom.all_weather_mobile_image2 | img_url: 'master' }});    }
+             {% endif %}
+             #comparison, #mob_comparison {padding-bottom: 0;     height: 571px; max-width: 428px;   margin: 0 auto;}
+
+             #mob_handle svg {
+    width: 67px;
+    height: 71px;
+}
+      }
+    #handle, #mob_handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      z-index: 1;
+    }
+
+    .product_image_text_slider input[type=range]{
+    	-webkit-appearance:none;
+    	-moz-appearance:none;
+    	position: absolute;
+/*     	top: 50%; left: -25px;
+      transform: translateY(-50%); */
+    	background-color: transparent;
+/*     	width: calc(100% + 50px); */
+      z-index: 2;
+      border: none;
+      outline: none;
+      opacity: 0;
+          cursor: pointer;
+          top: 3px;
+    bottom: 2px;
+    transform: none;
+    left: 3px;
+    padding: 0;
+    margin: 0;
+    right: 4px;
+    width: auto;
+    }
+    .product_image_text_slider input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      border: none;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      background: transparent;
+      border: 4px solid white;
+      box-shadow: 0 0 8px 1px rgba(0,0,0,.3);
+    }
+    .product_image_text_slider input[type=range]::-moz-range-track {
+    	-moz-appearance:none;
+    	height:15px;
+    	width: 100%;
+    	background-color: transparent;
+    	position: relative;
+    	outline: none;
+    }
+  @media (max-width: 430px){
+      #comparison, #mob_comparison {height:auto;     padding-bottom: calc(100% + 35%);}
+}
+      @media (max-width: 375px){
+      #comparison, #mob_comparison {height:auto;     padding-bottom: calc(100% + 35%);}
+}
+</style>
+{% schema %}
+{
+  "name": "Image slider  with text",
+  "settings":[
+   {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+     },
+    {
+        "type": "image_picker",
+        "id": "image1",
+        "label": "Image 1"
+     },
+     {
+        "type": "image_picker",
+        "id": "mob_image",
+        "label": "Mobile Image"
+     },
+    {
+        "type": "image_picker",
+        "id": "mob_image1",
+        "label": "Mobile Image 1"
+     }
+  ],
+  "presets": [
+    {
+      "name": "Image slider  with text",
+      "category": "Sections"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

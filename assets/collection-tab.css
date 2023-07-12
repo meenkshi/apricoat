@@ -1,0 +1,106 @@
+.feactured-tabs{
+    margin-bottom: 70px;
+    overflow: hidden;
+}
+.feactured-tabs .tabs .tabs-nav{
+    list-style: none;
+    margin: 0 22px 50px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.feactured-tabs .tabs .tabs-nav li a{
+    padding: 8px 30px;
+    margin-right: 10px;
+    border: 2px solid #222223;
+    border-radius: 30px;    
+    text-align: center;
+    background-color: #fff;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.feactured-tabs .tabs .tabs-nav li:hover a{
+    color: #fff;
+    background-color: #222223;
+    box-shadow: 0 .4rem .7rem #26262659;
+}
+.feactured-tabs .tabs .tabs-nav li.tab-active a{
+    color: #fff;
+    background-color: #222223;
+    box-shadow: 0 .4rem .7rem #26262659;
+}
+.feactured-tabs .tabs .tabs-nav li a{
+    font-size: 18px;
+    line-height: 22px;
+    font-family: 'basiccommercial_lt_lightRg';
+    display: block;
+    margin-bottom: 10px;
+}
+.tabs-stage .slick-list.draggable {
+    /* padding-left: 310px; */
+}
+ .slide-arrow{
+    top: 35%;
+    transform: translate(0px, -50%);
+    position: absolute;
+    /* background-color: #fff; */
+    z-index: 9;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    /* box-shadow: #ced4da 0px 2px 8px 0px; */
+    display: flex;
+    align-items: center;
+}
+ .next-arrow {
+right: 10px;
+}
+.feactured-tabs .tabs-block .next-arrow{
+    right: -22px;
+}
+ .prev-arrow {
+    left: 10px;
+}
+.featured-collection .prev-arrow{
+    left: 40px;
+}
+.slick-dots{
+    bottom: 0;
+}
+.slick-dots li{
+    width: 40px !important;
+    height: 20px !important;
+}
+.slick-dots li button{
+    width: 100px !important;
+    height: 4px !important;
+    background-color: #eeeee6 !important;
+    padding: 0 !important;
+}
+.slick-dots li.slick-active button{
+    background-color: #222223 !important;
+}
+.slick-dots li button:before{
+    content: none !important;
+}
+.grid-product__title{
+    text-transform: capitalize !important;
+}
+.grid-product__price , .quick-product__label{
+  
+}
+.feature_collection_section .grid {
+    padding:  0 30px;
+    margin: 0;
+}
+/* @media screen and (max-width: 1600px){
+    .tabs-stage .slick-list.draggable {
+        padding-left:200px;
+    } 
+} */
+
+/* @media screen and (max-width: 1440px){
+    .tabs-stage .slick-list.draggable {
+        padding-left :0 !important;
+    } 
+} */

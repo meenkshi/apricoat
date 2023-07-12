@@ -1,0 +1,117 @@
+<section class="feactured-tabs">
+  <div class="tabs">
+    <div class="page-width-2">
+      <ul class="tabs-nav">
+        {% for block in section.blocks %}
+          <li class=" {{ block.settings.title | replace:' ','-' |downcase}}">
+            <a href="#tab-{{ block.settings.number }}" data-id="tab{{ block.settings.number }}">
+              {{ block.settings.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="page-width-2s tabs-stage collection-jackets-section">
+      {% for block in section.blocks %}
+        <div class="tabs-block" id="tab-{{ block.settings.number }}">
+          {% comment %} <h1>{{ block.settings.title }} demo</h1> {% endcomment %}
+          <div class="collection-tab{{ block.settings.number }}">
+            {%- for product in collections[block.settings.home_featured_products].products -%}
+              {%- render 'jackets-product-grid-item', product: product -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  // Show the first tab by default
+  $('.tabs-stage div.tabs-block').hide();
+  $('.tabs-stage div:first').show();
+  $('.tabs-nav li:first').addClass('tab-active');
+
+// Change tab class and display content
+  $('.tabs-nav a').on('click', function(event) {
+    event.preventDefault();
+    $('.tabs-nav li').removeClass('tab-active');
+    $(this).parent().addClass('tab-active');
+    $('.tabs-stage div.tabs-block').hide();
+    $($(this).attr('href')).show();
+    var sid = $(this).data('id');
+    $(".collection-" + sid).slick("refresh");
+  });
+
+// slick slider
+
+  {% for block in section.blocks %}
+    $('.collection-tab{{ block.settings.number }}').slick({
+      infinite: false,
+      slidesToShow: 4.25,
+      slidesToScroll: 1,
+      dots: true,
+      centerMode: false,
+      arrows:true,
+      prevArrow: '<button class="slide-arrow prev-arrow"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-left" viewBox="0 0 284.49 498.98"><path d="M249.49 0a35 35 0 0 1 24.75 59.75L84.49 249.49l189.75 189.74a35.002 35.002 0 1 1-49.5 49.5L10.25 274.24a35 35 0 0 1 0-49.5L224.74 10.25A34.89 34.89 0 0 1 249.49 0z"></path></svg></button>',
+      nextArrow: '<button class="slide-arrow next-arrow"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-right" viewBox="0 0 284.49 498.98"><path d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98z"></path></svg></button>',
+      responsive: [
+        {
+          breakpoint: 1399,
+          settings: {
+            slidesToShow: 3.25
+          }
+        }, 
+        {
+          breakpoint: 991,
+          settings: {
+            slidesToShow: 2.3,
+          }
+        },
+        {
+          breakpoint: 580,
+          settings: {
+            slidesToShow: 1.4  ,
+            dots: false,  
+              arrows:false,
+          }
+        }
+      ]
+    });{% endfor %}
+</script>
+
+{% schema %}
+  {
+    "name": "Featured Collection Tabs",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "Collection",
+        "name": "Add Collection",
+        "settings": [
+          {
+            "type": "text",
+            "id": "number",
+            "label": "Add Number Of Tab"
+
+          }, {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Featured collection"
+          }, {
+            "type": "collection",
+            "id": "home_featured_products",
+            "label": "Collection"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Collection Tabs"
+      }
+    ]
+  }
+{% endschema %}

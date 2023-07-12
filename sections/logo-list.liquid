@@ -1,0 +1,208 @@
+{%- style -%}
+.logo-bar--{{ section.id }} {
+  opacity: {{ section.settings.logo_opacity | divided_by: 100.0 }};
+}
+{%- endstyle -%}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+
+<div class="page-width" data-aos="logo__animation">
+  {%- if section.settings.title != blank -%}
+    <div class="section-header">
+      <h2 class="section-header__title">{{ section.settings.title  }}</h2>
+      <span>{{ section.settings.subtitle  }}</span>
+    </div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="logo-bar logo-bar--{{ section.id }}">
+      {%- for block in section.blocks -%}
+        <div class="logo-bar__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="logo-bar__link">
+          {%- endif -%}
+          {%- if block.settings.image != blank -%}
+            {%- render 'image-element',
+              img: block.settings.image,
+              widths: '180, 360, 540, 720',
+              classes: 'logo-bar__image',
+              sizeVariable: '160px',
+              fallback: '110px',
+            -%}
+          {%- else -%}
+            {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          {%- if block.settings.link != blank -%}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{%- if section.settings.divider -%}</div>{%- endif -%}
+
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" ></script>
+
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('.logo-bar').slick({
+       slidesToShow: 5,
+      slidesToScroll: 1,
+       infinite: false,
+        autoplay: true,
+        responsive: [
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 3.5,     
+        infinite: true, 
+        arrows:false, 
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2.4,
+        arrows:false,        
+      }
+    }
+ 
+  ]
+      });
+    });
+  </script>
+  <style>
+.logo-slider .section-header__title{
+  font-size: {{ section.settings.title_size }}px;
+ color:{{ section.settings.h_color }} ;
+  {%- if section.settings.font_family == 'basiccommercial_lt_lightRg' -%}
+      font-family: 'basiccommercial_lt_lightRg';
+    {% endif %}
+  {%- if section.settings.font_family == 'basiccommercial_lt_romanRg' -%}
+      font-family: 'basiccommercial_lt_romanRg';
+    {% endif %}
+  {%- if section.settings.font_family == 'literaheavy' -%}
+      font-family: 'literaheavy';
+  {% endif %}
+}
+  </style>
+
+{% schema %}
+{
+  "name": "t:sections.logo-list.name",
+  "class": "index-section logo-slider",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.logo-list.settings.title.label"
+    },
+        {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sub Title"
+    },
+    {
+      "type": "range",
+      "id": "logo_opacity",
+      "label": "t:sections.logo-list.settings.logo_opacity.label",
+      "default": 76,
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "%"
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.logo-list.settings.divider.label",
+      "default": false
+    },
+    {
+          "type": "select",
+          "id": "font_family",
+          "label": "Choose Font",
+          "options": [
+            {
+              "value": "basiccommercial_lt_lightRg",
+              "label": "Basic Commercial Light"
+            },
+            {
+              "value": "basiccommercial_lt_romanRg",
+              "label": "Basic Commercial Roman"
+            },
+            {
+              "value": "literaheavy",
+              "label": "Litera"
+            }
+          ],
+          "default": "basiccommercial_lt_lightRg"
+        },
+        {
+          "type": "color",
+          "id": "h_color",
+          "label": "Heading Font Color",
+          "default": "#fff"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Subheading Font Size",
+          "default": 80,
+          "min": 20,
+          "max": 100,
+          "unit": "px"
+        }
+  ],
+  "blocks": [
+    {
+      "type": "logo_image",
+      "name": "t:sections.logo-list.blocks.logo.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.logo-list.blocks.logo.settings.image.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.logo-list.blocks.logo.settings.link.label",
+          "info": "t:sections.logo-list.blocks.logo.settings.link.info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.logo-list.presets.logo_list.name",
+      "blocks": [
+        {
+          "type": "logo_image"
+        },
+        {
+          "type": "logo_image"
+        },
+        {
+          "type": "logo_image"
+        },
+        {
+          "type": "logo_image"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,130 @@
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+<div class="pro-image-video">
+<div class="">
+  {%- if section.settings.title != blank -%}
+    <div class="section-header text-{{ section.settings.align_text }}">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+  {%- endif -%}
+
+
+
+  <div class="grid{% unless section.blocks.size == 5 %} grid--uniform{% endunless %} grid--flush-bottom">
+    {%- liquid
+      assign grid_item_width = 'medium-up--one-third'
+      case section.blocks.size
+        when 1
+          assign grid_item_width = 'medium-up--one-half'
+        when 2
+          assign grid_item_width = 'medium-up--one-half'
+        when 4
+          assign grid_item_width = 'medium-up--one-half'
+      endcase
+    -%}
+    {%- for block in section.blocks -%}
+      {%- if section.blocks.size == 5 and forloop.index < 3 -%}
+        {%- assign column_width = 'medium-up--one-half' -%}
+      {%- else -%}
+        {%- assign column_width = grid_item_width -%}
+      {%- endif -%}
+      
+      <div class="grid__item {{ column_width }} text-{{ section.settings.align_text }}" {{ block.shopify_attributes }} data-aos="row-of-3">
+     
+        
+<div class="video-wrapper">
+
+
+     {%- if block.settings.video_url contains '.mp4' or block.settings.video_url contains '.MP4' -%}
+        <video
+          id="Mp4Video-{{ section.id }}"
+          class="video-div desktop-videos"
+          data-type="mp4"
+          src="{{ block.settings.video_url }}"
+          loop muted playsinline autoplay></video>
+      {%- endif -%}
+  </div>
+
+        
+      </div>
+    {%- endfor -%}
+
+    <div>
+
+    </div>
+</div>
+{%- if section.settings.divider -%}</div>{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Full Width Video",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "t:sections.text-columns.settings.title.label"
+    },
+   {
+      "type": "select",
+      "id": "align_text",
+      "label": "t:sections.text-columns.settings.align_text.label",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.text-columns.settings.align_text.options.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.text-columns.settings.align_text.options.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.text-columns.settings.align_text.options.right.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.text-columns.settings.divider.label",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": "t:sections.text-columns.blocks.column.name",
+      "settings": [
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "t:sections.hero-video.settings.video_url.label",
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "info": "t:sections.hero-video.settings.video_url.info"
+    }
+
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Full Width Video",
+      "blocks": [
+        {
+          "type": "text_block"
+        },
+        {
+          "type": "text_block"
+        },
+        {
+          "type": "text_block"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["custom.popups"]
+  }
+}
+{% endschema %}

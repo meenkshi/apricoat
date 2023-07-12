@@ -1,0 +1,240 @@
+<section class="image-with-content" style="background-color:{{ section.settings.bg_color}} ;">   
+<div class="page-width">
+<div class="center-text">
+  <h2>{{ section.settings.Heading | escape }}</h2>
+ </div>
+ {%- if section.settings.image_alignment == 'left' -%} 
+   <div class="image-rows" >    
+          <div class="images">
+            {%- if section.settings.image != blank -%}
+            <img src=" {{section.settings.image  | img_url: '1020x' }});">
+            {%- endif -%}      
+         </div>
+         <div class="images-content">
+                     <div class="image-headings">
+                          
+                           <div class="desc">{{ section.settings.text}}</div>
+                     </div> 
+         </div>         
+   </div>
+   {%- endif -%}  
+   
+    {%- if section.settings.image_alignment == 'right' -%}
+     <div class="image-rows" >    
+         
+         <div class="images-content">
+                     <div class="image-headings">
+                          
+                           <div class="desc">{{ section.settings.text}}</div>
+                     </div> 
+         </div> 
+          <div class="images">
+            {%- if section.settings.image != blank -%}
+            <img src=" {{section.settings.image  | img_url: '1020x' }});">
+            {%- endif -%}      
+         </div>        
+   </div>
+  {%- endif -%}      
+  {%- if section.settings.link_url != blank -%}
+      <div class="image-btn">
+         <a href="{{ section.settings.link_url}}" class="btn">{{ section.settings.link_title}}</a>
+      </div>            
+   {%- endif -%} 
+</div>
+</section>
+<style>
+.image-with-content{
+       padding: 50px 0;
+}
+.image-with-content .center-text h2{   
+    text-transform: capitalize;
+   font-size: {{ section.settings.f_size}}px;    
+    margin-bottom: 0;
+    font-family: {{ section.settings.font_family}};
+    color: {{ section.settings.f_color}};   
+    text-align: center;
+}
+.image-with-content .image-rows{
+    padding: 30px 0;
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.images-content .desc{
+   padding: 50px;
+   color:{{ section.settings.f_color}};
+   font-size: {{ section.settings.f_size2}}px;    
+    margin-bottom: 0;
+    font-family: {{ section.settings.font_family2}};
+}
+.image-with-content .image-rows .images{
+   width: 50%;
+}
+.image-with-content .image-rows .images img{
+   width: 100%;
+}
+.image-with-content .image-rows .images-content{
+   width: 50%;
+}
+.image-btn a{
+       width: 60%;
+
+}
+@media screen and (max-width: 767px){
+   .image-with-content .center-text h2{
+       font-size: 24px;
+    line-height: 30px;
+}
+.image-with-content .image-rows .images{
+   width: 100%;
+}
+
+.image-with-content .image-rows .images-content{
+   width: 100%;
+}
+.image-with-content .image-rows{
+   display: block;
+}
+.images-content .desc{
+   padding: 15px;
+}
+.images-content .desc{   
+    font-size: 20px;
+    line-height: 32px;
+
+}
+}
+</style>
+{% schema %}
+{
+   "name": "left Or Right Content ",
+   "class": "left-right-content",
+   "settings": [
+      {
+         "type": "color",
+         "id": "bg_color",
+         "label": "Add BackGround Color",
+         "default": "#222",
+         "info": "Add Section BackGround Color"
+      },
+       {
+         "type": "color",
+         "id": "f_color",
+         "label": "Add Font Color",
+         "default": "#ddd"
+      },
+      {
+          "type": "select",
+          "id": "font_family",
+          "label": "Choose Font",
+          "options": [
+            {
+              "value": "basiccommercial_lt_lightRg",
+              "label": "Basic Commercial Light"
+            },
+            {
+              "value": "basiccommercial_lt_romanRg",
+              "label": "Basic Commercial Roman"
+            },
+            {
+              "value": "literaheavy",
+              "label": "Litera"
+            }
+          ],
+          "default": "basiccommercial_lt_lightRg"
+        },
+      {
+         "type": "range",
+         "id": "f_size",
+         "default": 80,
+         "min": 18,
+         "max": 100,
+         "unit": "px",
+         "label": "Heading Font Size"
+      },
+      
+        {
+        "type": "text",
+        "id": "Heading",
+        "label": "Add Heading"    
+        },     
+
+         {
+          "type": "select",
+          "id": "font_family2",
+          "label": "Choose SubHeading Font",
+          "options": [
+            {
+              "value": "basiccommercial_lt_lightRg",
+              "label": "Basic Commercial Light"
+            },
+            {
+              "value": "basiccommercial_lt_romanRg",
+              "label": "Basic Commercial Roman"
+            },
+            {
+              "value": "literaheavy",
+              "label": "Litera"
+            }
+          ],
+          "default": "basiccommercial_lt_lightRg"
+        },
+      {
+         "type": "range",
+         "id": "f_size2",
+         "default": 80,
+         "min": 18,
+         "max": 100,
+         "unit": "px",
+         "label": "SubHeading Font Size"
+      },
+     
+        {
+        "type": "html",
+        "id": "text",
+        "label": "Sub Heading"
+      },   
+            {
+      "type": "select",
+      "id": "image_alignment",
+      "label": "Image alignment",
+      "options": [
+         {
+            "value": "left",
+            "label": "Left"
+         },
+         {
+            "value": "right",
+            "label": "Right"
+         }
+      ],
+      "default": "left"
+      },
+         
+        {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Add Image"
+        },        
+        {
+         "type": "header",
+         "content": "Add Button Title Or Link"        
+        },
+          {
+        "type": "text",
+        "id": "link_title",
+        "label": "Button Title"
+      },
+      {
+         "type": "url",
+         "id": "link_url",
+         "label": "Add Button Link"
+      }
+   ],
+   "presets": [
+   {
+      "name": "left Or Right Content"
+   }]
+}
+{% endschema %}

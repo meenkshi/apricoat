@@ -1,0 +1,88 @@
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+
+<div class="page-width auto-video">
+  {%- if section.settings.title != blank -%}
+    <div class="section-header">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+  {%- endif -%}
+  <div class="video-wrapper" data-url="{{ section.settings.video_url }}" data-md-url="{{ section.settings.mobile_video_url }}">
+
+   
+     {%- if section.settings.video_url contains '.mp4' or section.settings.video_url contains '.MP4' -%}
+       
+        <video
+          id="Mp4Video-{{ section.id }}"
+          class="video-div desktop-videos  {% if section.settings.mobile_video_url == blank %}show_desktop {% endif %}"
+          data-type="mp4"
+          src="{{ section.settings.video_url }}"
+          loop muted playsinline autoplay></video>
+   
+     <video
+          id="Mp4Video-{{ section.id }}"
+          class="video-div mobile-videos"
+          data-type="mp4"
+          src="{{ section.settings.mobile_video_url }}"
+          loop muted playsinline autoplay></video>
+      {%- endif -%}
+   
+     
+  </div>
+</div>
+
+{%- if section.settings.divider -%}</div>{%- endif -%}
+ {% comment %}
+<script>
+  $(document).ready(function(){
+    var vdsrc = $('.auto-video .video-wrapper').data('url');
+    var vdhtml = '<video id="Mp4Video-{{ section.id }}"  class="video-div desktop-videos " muted autoplay loop="" playsinline="" webkit-playsinline="" tabindex="-1" aria-hidden="true" id="VideoWorker-0" ><source src="'+vdsrc+'" type="video/mp4"></video>';
+
+    var vmsrc = $('.auto-video .video-wrapper').data('md-url');
+    var vmhtml = '<video id="Mp4Video-{{ section.id }}" class="video-div mobile-videos" muted autoplay loop="" playsinline="" webkit-playsinline="" tabindex="-1" aria-hidden="true" id="VideoWorker-0" ><source src="'+vmsrc+'" type="video/mp4"></video>';
+
+    $('.auto-video .video-wrapper').append(vdhtml);
+    $('.auto-video .video-wrapper').append(vmhtml);
+    
+  });
+</script>
+{% endcomment %}
+{% schema %}
+{
+  "name": "Auto Video",
+  "class": "index-section auto-video-section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "t:sections.featured-video.settings.title.label"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "t:sections.hero-video.settings.video_url.label",
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "info": "t:sections.hero-video.settings.video_url.info"
+    },
+    {
+      "type": "text",
+      "id": "mobile_video_url",
+      "label": "Mobile Background video link",
+      "info": "Mobile background video link"
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.featured-video.settings.divider.label",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Auto Video"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,150 @@
+
+    .image-module {
+        margin: 0;
+    }
+    
+    .image-module li {
+        width: 46.5% !important;
+        margin: 5px !important;
+        float: left;
+        list-style: none;
+    }
+    
+    .image-module li a {
+        padding: 0 !important;
+        position: relative;
+    }
+    
+    .image-module li a img {
+        border-radius: 10px;
+        position: relative;
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+    }
+    
+    .image-module li a::after {
+        position: absolute;
+        content: "";
+        background-color: #000;
+        opacity: .3;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 15px;
+    }
+    
+    .image-module li a span {
+        display: flex;
+        align-items: center;
+        top: 50%;
+        transform: translateY(-50%);
+        bottom: 0;
+        right: 0;
+        left: 0;
+        justify-content: center;
+        position: absolute;
+        z-index: 1;
+        color: #fff;
+        letter-spacing: 1px;
+    }
+    
+    .desktop-nav {
+        margin-bottom: 22px;
+        /* position: relative; */
+        /* height: 260px;
+        overflow-x: hidden;
+        overflow-y: scroll; */
+    }
+    
+    .has-children a.menubelow {
+        position: relative;
+    }
+    
+    .has-children a.menubelow::after {
+        position: absolute;
+        content: '';
+        border: solid black;
+        border-width: 0 1px 1px 0;
+        display: inline-block;
+        padding: 3px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        top: 40%;
+        right: 5px;
+        transition: all .1s ease-in;
+    }
+    
+    .has-children.hover a.menubelow::after {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+    
+    .has-children.hover .sb-menu {
+        display: block !important;
+    }
+    /* new */
+    
+    .child-level {
+        position: absolute;
+        background-color: rgb(255, 255, 255);
+        z-index: 9;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        margin: 0px;
+        left: 0;
+    }
+    
+    .child-level li {
+        width: 100%;
+    }
+    
+    .back-to-first {
+        top: 14px;
+        display: block;
+        cursor: pointer;
+        position: fixed;
+    }
+    
+    .child-level .image-module li a:after {
+        content: none;
+    }
+    
+    .desktop-nav::-webkit-scrollbar {
+        width: 5px;
+    }
+    
+    .desktop-nav::-webkit-scrollbar-track {
+        background: #ddd;
+    }
+    
+    .desktop-nav::-webkit-scrollbar-thumb {
+        background-color: #000;
+        border-radius: 20px;
+        border: 1px solid #ddd;
+    }
+    .drawer__scrollable{
+        position: relative;
+    }
+    .dropdown-child{
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #fff;
+        margin: 0;
+        z-index: 2;
+        left: 0;
+    }
+    .dropdown-child li{
+        width: 94% !important;
+        margin: 10px 10px !important;
+        float: none;
+    
+    }
+    .drawer__scrollable.active{
+        overflow: hidden;
+    }

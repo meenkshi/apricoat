@@ -1,0 +1,417 @@
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+
+<div class="page-width">
+  {%- if section.settings.title != blank -%}
+    <div class="section-header text-{{ section.settings.align_text }}">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+  {%- endif -%}
+
+  <div class="image-overlay-text grid{% unless section.blocks.size == 5 %} grid--uniform{% endunless %} grid--flush-bottom">
+    {%- liquid
+      assign grid_item_width = 'medium-up--one-third'
+      case section.blocks.size
+        when 1
+          assign grid_item_width = 'medium-up--one-half'
+        when 2
+          assign grid_item_width = 'medium-up--one-half'
+      when 3
+          assign grid_item_width = 'medium-up--one-half three_grid_item_width'
+        when 4
+          assign grid_item_width = 'medium-up--one-half'
+      endcase
+    -%}
+    {%- for block in section.blocks -%}
+      {%- if section.blocks.size == 5 and forloop.index < 3 -%}
+        {%- assign column_width = 'medium-up--one-half' -%}
+      {%- else -%}
+        {%- assign column_width = grid_item_width -%}
+      {%- endif -%}
+      <div class="image-hover grid__item {{ column_width }} text-{{ section.settings.align_text }}" {{ block.shopify_attributes }} data-aos="row-of-3">
+         {%- if block.settings.button_link != blank -%}
+              <a href="{{ block.settings.button_link }}">
+            {%- endif -%}
+        {%- if block.settings.enable_image -%}
+          <div style="{% if section.settings.align_text == 'center' %}margin: 0 auto;{% endif %} max-width: {{ block.settings.image_width }}px;">
+          
+            {%- if block.settings.image != blank -%}
+              <div class="image-wrap {% if block.settings.image_mobile == blank %}show_desktop_img{% else %}hide_desktop_img {% endif %} text-spacing {% if block.settings.image_mask != 'none' %}svg-mask svg-mask--{{ block.settings.image_mask }}{% endif %}" style="height: 0; padding-bottom: {{ 100 | divided_by: block.settings.image.aspect_ratio }}%;">
+                {% comment %}
+              {%- render 'image-element',
+                  img: block.settings.image,
+                  sizeVariable: column_width,
+                  widths: '180, 360, 540, 720, 900, 1080',
+                -%}
+              {% endcomment %}
+              {%- render 'image-element-text',
+                      img: block.settings.image,
+                 img_m: block.settings.image_mobile,
+                      img_width: 1220,
+                      loading: loading                    
+                    -%}
+
+
+              
+                
+              </div>
+            {%- else -%}
+              <div class="image-wrap text-spacing {% if block.settings.image_mask != 'none' %}svg-mask svg-mask--{{ block.settings.image_mask }}{% endif %}">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+            {%- endif -%}
+          
+          </div>
+        {%- endif -%}
+        <div class="image-text-boxes">
+        {%- if block.settings.title != blank -%}
+          <h3>{{ block.settings.title }}</h3>
+        {%- endif -%}
+        {%- if block.settings.text != blank -%}
+          <div class="rte-setting text-spacing">{{ block.settings.text }}</div>
+        {%- endif -%}
+        {%- if block.settings.button_label != blank -%}
+          <div class="btn">
+            {{ block.settings.button_label }}
+          </div>
+        {%- endif -%}        
+        </div>
+  {%- if block.settings.button_link != blank -%}
+              </a>
+  {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{%- if section.settings.divider -%}</div>{%- endif -%}
+
+<style>
+.image-hover {
+  position: relative;
+}
+.image-hover .image-text-boxes{
+    position: absolute;
+    top: 50%;
+    transform: translate(0px, -50%);
+    padding: 50px;
+    color: {{ section.settings.f_color }};
+    text-align: center;
+    width: 100%;
+}
+.image-text-boxes h3{
+ font-size: {{ section.settings.f_size }}px;
+ color:{{ section.settings.f_color }} ;
+  {%- if section.settings.font_family == 'basiccommercial_lt_lightRg' -%}
+      font-family: 'basiccommercial_lt_lightRg';
+    {% endif %}
+  {%- if section.settings.font_family == 'basiccommercial_lt_romanRg' -%}
+      font-family: 'basiccommercial_lt_romanRg';
+    {% endif %}
+  {%- if section.settings.font_family == 'literaheavy' -%}
+      font-family: 'literaheavy';
+  {% endif %}
+}
+.image-text-boxes .text-spacing p{
+font-size: {{ section.settings.f_size2 }}px;
+ color:{{ section.settings.f_color2 }} ;
+  {%- if section.settings.font_family2 == 'basiccommercial_lt_lightRg' -%}
+      font-family: 'basiccommercial_lt_lightRg';
+    {% endif %}
+  {%- if section.settings.font_family2 == 'basiccommercial_lt_romanRg' -%}
+      font-family: 'basiccommercial_lt_romanRg';
+    {% endif %}
+  {%- if section.settings.font_family2 == 'literaheavy' -%}
+      font-family: 'literaheavy';
+  {% endif %}
+}
+.image-text-boxes .btn{
+  background-color: {{ section.settings.btn_color }};
+  color: {{ section.settings.btn_f_color }};  
+}
+.image-text-boxes .btn:hover{
+ 
+}
+.image-hover a:hover .image-text-boxes .btn{
+   background-color: {{ section.settings.btn_h_color }} !important;
+}
+@media screen and (max-width: 767px) {
+  .image-text-boxes h3{
+        font-size: 28px;
+  }
+  .image-text-boxes .text-spacing p{
+    font-size: 18px;
+
+  }
+  .image-hover .image-text-boxes{
+    padding:20px;
+  }
+ }
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+{% schema %}
+{
+  "name": "Text column with content",
+  "class": "index-section text-overlay",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.text-columns.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "align_text",
+      "label": "t:sections.text-columns.settings.align_text.label",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.text-columns.settings.align_text.options.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.text-columns.settings.align_text.options.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.text-columns.settings.align_text.options.right.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.text-columns.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "styles"
+    },
+    {
+         "type": "color",
+         "id": "f_color",
+         "label": "Add Heading Font Color",
+         "default": "#ddd"
+      },
+       {
+          "type": "select",
+          "id": "font_family",
+          "label": "Choose Heading Font",
+          "options": [
+            {
+              "value": "basiccommercial_lt_lightRg",
+              "label": "Basic Commercial Light"
+            },
+            {
+              "value": "basiccommercial_lt_romanRg",
+              "label": "Basic Commercial Roman"
+            },
+            {
+              "value": "literaheavy",
+              "label": "Litera"
+            }
+          ],
+          "default": "basiccommercial_lt_lightRg"
+        },
+      {
+         "type": "range",
+         "id": "f_size",
+         "default": 30,
+         "min": 18,
+         "max": 100,
+         "unit": "px",
+         "label": "Heading Font Size"
+      },
+          {
+          "type": "select",
+          "id": "font_family2",
+          "label": "Choose Subheading Font",
+          "options": [
+            {
+              "value": "basiccommercial_lt_lightRg",
+              "label": "Basic Commercial Light"
+            },
+            {
+              "value": "basiccommercial_lt_romanRg",
+              "label": "Basic Commercial Roman"
+            },
+            {
+              "value": "literaheavy",
+              "label": "Litera"
+            }
+          ],
+          "default": "basiccommercial_lt_lightRg"
+        },
+      {
+         "type": "range",
+         "id": "f_size2",
+         "default":22,
+         "min": 18,
+         "max": 100,
+         "unit": "px",
+         "label": "Subheading Font Size"
+      },
+      {
+        "type": "header",
+        "content": "Button Styles"
+      },
+      {
+        "type": "color",
+        "id": "btn_color",
+        "label": "Button Background Color"
+      },
+      {
+        "type": "color",
+        "id": "btn_f_color",
+        "label": "Button Font Color"
+      },
+      {
+        "type": "color",
+        "id": "btn_h_color",
+        "label": "Button Hover Color"
+      }
+  ],
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": "t:sections.text-columns.blocks.column.name",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "enable_image",
+          "label": "t:sections.text-columns.blocks.column.settings.enable_image.label",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.text-columns.blocks.column.settings.image.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Mobile image"
+        },
+        {
+          "type": "select",
+          "id": "image_mask",
+          "label": "t:common.image_mask.label",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:common.image_mask.options.none.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:common.image_mask.options.portrait.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:common.image_mask.options.landscape.label"
+            },
+            {
+              "value": "square",
+              "label": "t:common.image_mask.options.square.label"
+            },
+            {
+              "value": "rounded",
+              "label": "t:common.image_mask.options.rounded.label"
+            },
+            {
+              "value": "rounded-wave",
+              "label": "t:common.image_mask.options.rounded-wave.label"
+            },
+            {
+              "value": "rounded-top",
+              "label": "t:common.image_mask.options.rounded-top.label"
+            },
+            {
+              "value": "star",
+              "label": "t:common.image_mask.options.star.label"
+            },
+            {
+              "value": "splat-1",
+              "label": "t:common.image_mask.options.splat-1.label"
+            },
+            {
+              "value": "splat-2",
+              "label": "t:common.image_mask.options.splat-2.label"
+            },
+            {
+              "value": "splat-3",
+              "label": "t:common.image_mask.options.splat-3.label"
+            },
+            {
+              "value": "splat-4",
+              "label": "t:common.image_mask.options.splat-4.label"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "label": "t:sections.text-columns.blocks.column.settings.image_width.label",
+          "default": 650,
+          "min": 60,
+          "max": 650,
+          "step": 10,
+          "unit": "px"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.text-columns.blocks.column.settings.title.label",
+          "default": "Example title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.text-columns.blocks.column.settings.text.label",
+          "default": "<p>Use this section to explain a set of product features, to link to a series of pages, or to answer common questions about your products. Add images for emphasis.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:sections.text-columns.blocks.column.settings.button_label.label",
+          "default": "Optional button"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.text-columns.blocks.column.settings.button_link.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text column with content",
+      "blocks": [
+        {
+          "type": "text_block"
+        },
+        {
+          "type": "text_block"
+        },
+        {
+          "type": "text_block"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["custom.popups"]
+  }
+}
+{% endschema %}

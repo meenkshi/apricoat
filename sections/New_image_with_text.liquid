@@ -1,0 +1,299 @@
+{% assign niwclass = '' %}
+{% if product.handle contains 'adventure-pants' %}
+   {% assign niwclass = 'adventure-pants-men-navy-blue' %}
+   {% elsif product.handle contains 'ecodown-jacket-men' %}
+  {% assign niwclass = 'ecodown-jacket-men-yellow' %}
+   {% elsif product.handle contains 'ecodown-jacket-women' %}
+  {% assign niwclass = 'ecodown-jacket-women-gray' %}
+   {% elsif product.handle contains 'men-quickdry-ls-shirt' %}
+  {% assign niwclass = 'men-quickdry-ls-shirt-gray' %}
+  {% elsif product.handle contains 'women-quickdry-ls-shirt' %}
+  {% assign niwclass = 'women-quickdry-ls-shirt-gray' %}
+  {% elsif product.handle contains 'men-quickdry-shirt' %}
+  {% assign niwclass = ' men-quickdry-shirt-gray' %}
+  {% elsif product.handle contains 'adventure-2-0' %}
+  {% assign niwclass = ' adventure-2-0-men-navy-blue' %}
+{% else %}
+ {% assign niwclass = product.handle | downcase | replace:' ','-'  %}
+{% endif %}
+<section class="MIWT_wrapper {{ niwclass }}">
+   {% if product.handle contains 'adventure-2-0' %}
+  <h2>{{ section.settings.title }}</h2>
+  <p>{{ section.settings.description }}</p>
+  {% endif %}  
+  {{ product.metafields.custom.we_had_a_dream_top_content | metafield_tag}}
+ 
+  
+  <div class="content_wrapper">
+    <div class="image_wrapper">
+      {% if product.handle contains 'adventure-2-0' %}
+          {% if section.settings.image != blank %}
+              <img class="desktop-image" src="{{ section.settings.image | img_url: 'master' }}">
+          {% endif %}
+          {% if section.settings.image_mobile != blank %}
+             <img class= "mobile-image" src="{{ section.settings.image_mobile | img_url: 'master' }}"> 
+         {% endif %} 
+      {% endif %}  
+      
+       {% if  product.metafields.custom.jacket_desktop_image  != blank %}
+      <img class="desktop-image" src="{{ product.metafields.custom.jacket_desktop_image  | img_url: 'master'}}"/>
+        {% endif %}   
+      
+        {% if product.metafields.custom.jacket_mobile_image != blank %}
+      <img class= "mobile-image" src="{{ product.metafields.custom.jacket_mobile_image  | img_url: 'master'}}"/>
+        {% endif %}
+        
+    </div>
+    <div class="content">
+
+      {%  if product.metafields.custom.we_had_a_dream_block_content_1 !=blank %}
+      <div class="icon-text mobile-icon-text1">
+        {{ product.metafields.custom.we_had_a_dream_block_content_1 }}
+     </div>
+      {% endif %}
+      {%  if product.metafields.custom.we_had_a_dream_block_content_2 !=blank %}
+      <div class="icon-text mobile-icon-text2">
+          {{ product.metafields.custom.we_had_a_dream_block_content_2 }}
+      </div>
+       {% endif %}
+      {%  if product.metafields.custom.we_had_a_dream_block_content_2 !=blank %}
+       <div class="icon-text mobile-icon-text3">
+          {{ product.metafields.custom.we_had_a_dream_block_content_3}}
+       </div> 
+      {% endif %}
+      
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "New IWT",
+  "class":"NIWT_text",
+  "settings": [
+            {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Add Desktop Image"
+            },
+            {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Add Mobile Image "
+            },
+            {
+             "type": "text",
+             "id": "title",
+             "label": "Add Title"
+            },
+            {
+             "type": "text",
+             "id": "description",
+             "label": "Add Description"
+            }
+  ],
+  "presets":[
+    {
+      "name":"New IWT"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+                  .NIWT_text .MIWT_wrapper {
+                    max-width: 1087px;
+                    margin: 0 auto;
+                    padding: 0 30px;
+                }
+
+                .NIWT_text .MIWT_wrapper .content_wrapper {
+                  display: grid;
+                  grid-template-columns: repeat(2,1fr);
+              }
+              .NIWT_text .MIWT_wrapper .icon-text {
+                display: flex;
+                grid-template-columns: max-content auto;
+                align-items: center;
+                height:113px;
+            }
+            .NIWT_text .MIWT_wrapper .icon-content{
+              margin-left:20px;
+            }
+            .NIWT_text .MIWT_wrapper .icon-content h6{
+              margin-bottom:0;
+              cursor:pointer;
+              max-width:max-content;
+              font-size: 26px;
+              letter-spacing: 0;
+              font-family: 'literalight';
+              font-weight: 100;
+              text-transform: inherit;
+              line-height: 37px;
+              color:#000;
+            }
+              .NIWT_text .MIWT_wrapper .icon-content.hid p{
+                display:none;
+              font-weight: 400;
+              font-size: 20px;
+              line-height: 30.5px;
+              font-family: 'basiccommercial_lt_lightRg';
+              letter-spacing: 0;
+            }
+        .NIWT_text .MIWT_wrapper .icon-content.hid.show p{
+          display:block !important;
+        }
+            .NIWT_text .MIWT_wrapper h2 {
+               font-size: 48px;
+               text-align: center;
+              color: #000;
+              display: inline-block;
+              width: 100%;
+          }
+          .NIWT_text .MIWT_wrapper > p,.NIWT_text .MIWT_wrapper > .metafield-rich_text_field p {
+            font-size: 24px;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+            line-height: 30px;
+            margin-bottom:30px;
+        }
+       .NIWT_text .content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          position:relative;
+
+      }
+            .NIWT_text .MIWT_wrapper .icon-text:nth-child(1) {
+              position:absolute;
+            top: 18%;
+            left: 6px;
+        }
+      .NIWT_text .MIWT_wrapper .icon-text:nth-child(2) {
+        position: absolute;
+        left: 24px;
+        top: 44%;
+    }
+    .NIWT_text .MIWT_wrapper .icon-text:nth-child(3) {
+      position: absolute;
+      bottom: 10%;
+      left: 7px;
+  }
+  .NIWT_text .mobile-image{display:none;}
+    
+  .MIWT_wrapper.ecodown-jacket-men-yellow .icon-text:nth-child(1), .MIWT_wrapper.men-quickdry-shirt-gray .icon-text:nth-child(1), .MIWT_wrapper.men-quickdry-ls-shirt-gray .icon-text:nth-child(1),
+    .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text:nth-child(1)      {
+    top: 21%;
+}
+   .MIWT_wrapper.ecodown-jacket-men-yellow .icon-text:nth-child(2) {
+    top: 46%;
+}
+   .MIWT_wrapper.ecodown-jacket-men-yellow .icon-text:nth-child(3) , .MIWT_wrapper.men-quickdry-shirt-gray .icon-text:nth-child(3), .MIWT_wrapper.men-quickdry-ls-shirt-gray .icon-text:nth-child(3),
+  .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text:nth-child(3) {
+    bottom: 12.5%;
+}
+
+ .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text:nth-child(1) {
+   top: 8%;
+}
+  .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text:nth-child(2) {
+  top: 37%;
+}
+  .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text:nth-child(3) {
+   bottom: 14.5%;
+}
+  @media(max-width:1024px){
+      .NIWT_text .MIWT_wrapper .icon-content.hid p{display:block !important;font-size:16px;line-height:22px;}
+      .NIWT_text .MIWT_wrapper .icon-content h6{font-size:20px;line-height:25px;margin-bottom:10px;}
+      .NIWT_text .MIWT_wrapper .icon-text{height:auto;}      
+  }
+  @media(max-width:749px){
+    .NIWT_text .mobile-image{display:none;} .desktop-image{display:none;}
+    .NIWT_text .mobile-image{display:block;margin: 0 auto;}
+    .NIWT_text .MIWT_wrapper .content_wrapper{grid-template-columns:1fr;}
+    .NIWT_text .MIWT_wrapper .icon-text:nth-child(1),
+    .NIWT_text .MIWT_wrapper .icon-text:nth-child(2),
+    .NIWT_text .MIWT_wrapper .icon-text:nth-child(3){position:unset !important;display: grid;grid-template-columns: 70px auto;}
+    .NIWT_text .MIWT_wrapper .icon-text:not(:last-child){margin-bottom:10px;}
+    .NIWT_text .content{margin-top:20px;}
+    .NIWT_text .MIWT_wrapper .icon-text:nth-child(1), .NIWT_text .MIWT_wrapper .icon-text:nth-child(2), .NIWT_text .MIWT_wrapper .icon-text:nth-child(3){grid-template-columns: 1fr; text-align: center;    }
+    .NIWT_text .MIWT_wrapper .icon-content{margin-left:0;}
+    .NIWT_text .MIWT_wrapper .icon-content h6{margin:0 auto 10px;}
+    .NIWT_text .MIWT_wrapper .icon-text img{display:table;margin:0 auto 10px;}
+   .NIWT_text .MIWT_wrapper > p, .NIWT_text .MIWT_wrapper > .metafield-rich_text_field p{ font-size: 20px;  line-height: 25px;  font-family: "basiccommercial_lt_lightRg";   max-width: 312px;}
+ 
+   section.MIWT_wrapper.ecodown-jacket-men-yellow .icon-text.mobile-icon-text1:nth-child(1),
+    .MIWT_wrapper.men-quickdry-shirt-gray .icon-text.mobile-icon-text1:nth-child(1),
+    .NIWT_text .MIWT_wrapper.men-quickdry-ls-shirt-gray .icon-text.mobile-icon-text1:nth-child(1),
+    .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text1:nth-child(1),
+     .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text1:nth-child(1){margin-top: -109%;    left: 5px;}
+    
+   section.MIWT_wrapper.ecodown-jacket-men-yellow .icon-text.mobile-icon-text2:nth-child(2),
+    .MIWT_wrapper.men-quickdry-shirt-gray .icon-text.mobile-icon-text2:nth-child(2),
+    .NIWT_text .MIWT_wrapper.men-quickdry-ls-shirt-gray .icon-text.mobile-icon-text2:nth-child(2),
+    .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text2:nth-child(2),
+     .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text2:nth-child(2){margin-top: -56%;}
+    
+   section.MIWT_wrapper.ecodown-jacket-men-yellow .icon-text.mobile-icon-text3:nth-child(3),
+    .MIWT_wrapper.men-quickdry-shirt-gray .icon-text.mobile-icon-text3:nth-child(3),
+    .NIWT_text .MIWT_wrapper.men-quickdry-ls-shirt-gray .icon-text.mobile-icon-text3:nth-child(3),
+    .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text3:nth-child(3),
+     .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text3:nth-child(3){margin-top: -19px; left: 114px;}
+
+    .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text1:nth-child(1),
+    .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text1:nth-child(1){left: 24px;}
+    
+    .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text2:nth-child(2),
+    .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text2:nth-child(2){left: 66px;}
+    
+    .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text3:nth-child(3),
+    .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text3:nth-child(3){left: 137px;}
+  }
+  @media(max-width:480px){
+    .NIWT_text .MIWT_wrapper h2{font-size:32px;line-height:40px;}
+    .NIWT_text .MIWT_wrapper > p {font-size: 20px;line-height: 24px;margin-bottom: 40px;}
+  }
+  @media (max-width: 440px){
+   section.MIWT_wrapper.ecodown-jacket-men-yellow .icon-text.mobile-icon-text1:nth-child(1),
+     .MIWT_wrapper.men-quickdry-shirt-gray .icon-text.mobile-icon-text1:nth-child(1),
+     .NIWT_text .MIWT_wrapper.men-quickdry-ls-shirt-gray .icon-text.mobile-icon-text1:nth-child(1),
+     .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text1:nth-child(1),
+    .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text1:nth-child(1){left: -47px; margin-top: -110%;}
+    
+   section.MIWT_wrapper.ecodown-jacket-men-yellow .icon-text.mobile-icon-text2:nth-child(2),
+     .MIWT_wrapper.men-quickdry-shirt-gray .icon-text.mobile-icon-text2:nth-child(2),
+     .NIWT_text .MIWT_wrapper.men-quickdry-ls-shirt-gray .icon-text.mobile-icon-text2:nth-child(2),
+     .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text2:nth-child(2),
+    .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text2:nth-child(2){margin-top: -52%;}
+    
+   section.MIWT_wrapper.ecodown-jacket-men-yellow .icon-text.mobile-icon-text3:nth-child(3),
+     .MIWT_wrapper.men-quickdry-shirt-gray .icon-text.mobile-icon-text3:nth-child(3),
+     .NIWT_text .MIWT_wrapper.men-quickdry-ls-shirt-gray .icon-text.mobile-icon-text3:nth-child(3),
+     .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text3:nth-child(3){ left: 24px;}
+
+    .MIWT_wrapper.men-quickdry-shirt-gray .icon-text.mobile-icon-text2:nth-child(2) { left: -20px;}
+
+    .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text1:nth-child(1),
+    .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text1:nth-child(1){left: -35px;}
+    .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text2:nth-child(2),
+    .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text2:nth-child(2){left: -5px;}
+    .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text3:nth-child(3) ,
+    .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text3:nth-child(3){ left: 44px;}
+
+    section.MIWT_wrapper.ecodown-jacket-men-yellow .icon-text.mobile-icon-text3:nth-child(3), .MIWT_wrapper.men-quickdry-shirt-gray .icon-text.mobile-icon-text3:nth-child(3), 
+    .NIWT_text .MIWT_wrapper.men-quickdry-ls-shirt-gray .icon-text.mobile-icon-text3:nth-child(3), .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text3:nth-child(3),
+    .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text3:nth-child(3) {  margin-top: 0; }
+
+    .NIWT_text .MIWT_wrapper .icon-content h6 {font-size: 18px;line-height: normal;}
+    
+  }
+  @media (max-width: 360px){
+     section.MIWT_wrapper.ecodown-jacket-men-yellow .icon-text.mobile-icon-text3:nth-child(3),
+     .MIWT_wrapper.men-quickdry-shirt-gray .icon-text.mobile-icon-text3:nth-child(3),
+     .NIWT_text .MIWT_wrapper.men-quickdry-ls-shirt-gray .icon-text.mobile-icon-text3:nth-child(3),
+     .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text3:nth-child(3){ left: 8px;}
+    .NIWT_text .MIWT_wrapper.adventure-pants-men-navy-blue .icon-text.mobile-icon-text3:nth-child(3),
+    .NIWT_text .MIWT_wrapper.trail-shorts-men-ensign-blue .icon-text.mobile-icon-text3:nth-child(3){ left: 18px;}
+  }
+</style>
+

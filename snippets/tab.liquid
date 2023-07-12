@@ -1,0 +1,35 @@
+{%- liquid
+  assign output_tab = true
+  if title == blank and content == blank
+    assign output_tab = false
+  endif
+-%}
+{%- if output_tab -%}
+  <div class="collapsibles-wrapper collapsibles-wrapper--border-bottom">
+    <button type="button"
+      class="label collapsible-trigger  collapsible-trigger-{{ title | downcase }} collapsible-trigger-btn collapsible-trigger-btn--borders collapsible--auto-height{% if force_open %} is-open{% endif %}" aria-controls="Product-content-{{ id }}"
+      {% if force_open %}aria-expanded="true"{% endif %}>
+      {{ title }}
+      
+     
+      {% if title == 'Reviews' %}
+         <!-- Stamped - Begin Star Rating Badge -->
+        <span class=" stamped-product-reviews-badge" data-product-sku="{{ product.handle }}" data-id="{{ product.id }}" data-product-type="{{product.type}}" data-product-title="{{product.title}}"  style="display:block;">{{ product.metafields.stamped.badge }}</span><!-- Stamped - End Star Rating Badge -->
+        <style> .stamped-badge-caption {display: inline !important;    font-size: 14px;} </style>
+        <!-- END of Stamped - Begin Star Rating Badge -->
+        {% endif %}
+   
+  
+      {%- render 'collapsible-icons' -%}
+    </button>
+    <div id="Product-content-{{ id }}"
+      class="collapsible-content collapsible-content--all{% if force_open %} is-open{% endif %}"
+      {% if force_open %}style="height: auto;"{% endif %}>
+      <div class="collapsible-content__inner rte">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+

@@ -1,0 +1,95 @@
+<div
+  class="collection-content"
+  data-section-id="{{ section.id }}"
+  data-section-type="collection-grid"
+>  
+  <div id="CollectionAjaxContent" class="collection-jackets-section">
+    <div class="page-width">
+
+      <div class="collection-jackets-header  text-center">
+        <h1>{{ collection.title }}</h1>
+        <ul class="tabs">
+            <li class="active" rel="tab1">Men</li>
+            <li rel="tab2">Women</li>
+        </ul>
+      </div>
+      
+        <div class="tab_container">
+         <div id="tab1" class="tab_content">
+           <div class="grid">
+      {% for product in collection.products %}
+        {% if product.title contains 'Adventure 2.0 - Men' %}
+         {%- render 'jackets-product-grid-item' , product: product -%}
+          {% endif %}
+        {% endfor %}
+           </div>
+          </div>          
+          <div id="tab2" class="tab_content">
+              <div class="grid">
+         {% for product in collection.products %}
+        {% if product.title contains 'Adventure 2.0 - Women' %}
+          {%- render 'jackets-product-grid-item' , product: product -%}
+          {% endif %}
+        {% endfor %}
+              </div>
+          </div>
+          
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Collection Adventure 2.0",
+  "settings": [ ]
+  
+  
+}
+{% endschema %}
+
+<script>
+  $(document).ready(function(){   
+  
+ // tabbed content
+    // http://www.entheosweb.com/tutorials/css/tabs.asp
+    $(".tab_content").hide();
+    $(".tab_content:first").show();
+
+  /* if in tab mode */
+    $("ul.tabs li").click(function() {
+		
+      $(".tab_content").hide();
+      var activeTab = $(this).attr("rel"); 
+      $("#"+activeTab).fadeIn();		
+		
+      $("ul.tabs li").removeClass("active");
+      $(this).addClass("active");
+
+	  $(".tab_drawer_heading").removeClass("d_active");
+	  $(".tab_drawer_heading[rel^='"+activeTab+"']").addClass("d_active");
+	  
+    });
+	/* if in drawer mode */
+	$(".tab_drawer_heading").click(function() {
+      
+      $(".tab_content").hide();
+      var d_activeTab = $(this).attr("rel"); 
+      $("#"+d_activeTab).fadeIn();
+	  
+	  $(".tab_drawer_heading").removeClass("d_active");
+      $(this).addClass("d_active");
+	  
+	  $("ul.tabs li").removeClass("active");
+	  $("ul.tabs li[rel^='"+d_activeTab+"']").addClass("active");
+    });
+	
+	
+	/* Extra class "tab_last" 
+	   to add border to right side
+	   of last tab */
+	$('ul.tabs li').last().addClass("tab_last");
+	});
+</script>

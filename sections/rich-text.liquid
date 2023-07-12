@@ -1,0 +1,349 @@
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+
+<div id="{{ section.settings.sec-id }}" class="text-{{ section.settings.align_text }} page-width{% if section.settings.narrow_column %} page-width--narrow{% endif %} {{ section.settings.main_class_rich }}">
+  {%- for block in section.blocks -%}
+    <div class="theme-block" {{ block.shopify_attributes }}>
+      {%- case block.type -%}
+        {%- when 'heading' -%}
+          <h2 class="home_Crowdfunding_title">{{ block.settings.title | escape }}<style>
+      {% unless page.handle == 'about-us' or  page.handle == 'sustainability'  %} 
+         #shopify-section-{{section.id}} .home_Crowdfunding_title
+      {
+          font-size: {{ block.settings.f_size }}px ;
+          color:{{ block.settings.f_color }} ;
+          {%- if block.settings.font_family == 'basiccommercial_lt_lightRg' -%}
+              font-family: 'basiccommercial_lt_lightRg';
+          {% endif %}
+          {%- if block.settings.font_family == 'basiccommercial_lt_romanRg' -%}
+              font-family: 'basiccommercial_lt_romanRg';
+          {% endif %}
+              {%- if block.settings.font_family == 'literaheavy' -%}
+                  font-family: 'Litera-Serial-Heavy';
+              {% endif %}
+          {%- if block.settings.font_family == 'Litera-Regular' -%}
+                 font-family: 'Litera-Regular';
+          {% endif %}
+          text-transform: none;
+           letter-spacing: 0.3px;
+      }
+        {% endunless %}
+        </style></h2>
+      
+        {%- when 'page' -%}
+          <div class="rte">
+            {%- if block.settings.page_text != blank -%}
+              {{ pages[block.settings.page_text].content }}
+            {%- else -%}
+              {{ 'home_page.onboarding.no_content' | t }}
+            {%- endif -%}
+      
+          </div>
+        {%- when 'text' -%}
+          <div class="rte">
+            {%- if block.settings.text != blank -%}
+              {%- if block.settings.enlarge_text %}<div class="enlarge-text">{% endif -%}
+            <div class="richtext">  {{ block.settings.text }}</div>
+    <style>
+      {% unless page.handle == 'about-us' or  page.handle == 'sustainability'  %} 
+          #shopify-section-{{section.id}}  .richtext
+      {
+          font-size: {{ block.settings.f_size2 }}px;
+          color:{{ block.settings.f_color2 }} ;
+          {%- if block.settings.font_family2 == 'basiccommercial_lt_lightRg' -%}
+              font-family: 'basiccommercial_lt_lightRg';
+          {% endif %}
+          {%- if block.settings.font_family2 == 'basiccommercial_lt_romanRg' -%}
+              font-family: 'basiccommercial_lt_romanRg';
+          {% endif %}
+              {%- if block.settings.font_family2 == 'literaheavy' -%}
+                  font-family: 'literaheavy';
+              {% endif %}
+          {%- if block.settings.font_family2 == 'Litera-Regular' -%}
+                 font-family: 'Litera-Regular';
+          {% endif %}
+      }
+        {% endunless %}
+     </style>
+              {%- if block.settings.enlarge_text %}</div>{% endif -%}
+            {%- else -%}
+              {{ 'home_page.onboarding.no_content' | t }}
+            {%- endif -%}
+          </div>
+        {%- when 'button' -%}
+          <div class="rte">
+            <a href="{{ block.settings.link }}" class="btn">
+              {{ block.settings.link_text }}                 
+  <style>
+         {% unless page.handle == 'about-us' or  page.handle == 'sustainability'  %} 
+           #shopify-section-{{section.id}}    a.btn{
+          font-size: {{ block.settings.f_size3  }}px !important;
+          color:{{ block.settings.f_color3  }} !important;
+          {%- if block.settings.font_family3 == 'basiccommercial_lt_lightRg'-%}
+              font-family: 'basiccommercial_lt_lightRg'!important;
+          {% endif %}
+          {%- if block.settings.font_family3 == 'basiccommercial_lt_romanRg' -%}
+              font-family: 'basiccommercial_lt_romanRg'!important;
+          {% endif %}
+              {%- if block.settings.font_family3 == 'literaheavy' -%}
+                  font-family: 'literaheavy'!important;
+              {% endif %}
+          {%- if block.settings.font_family3 == 'Litera-Regular' -%}
+                 font-family: 'Litera-Regular'!important;
+          {% endif %}
+      }
+        {% endunless %}
+     </style>
+              
+            </a>
+          </div>
+      {%- endcase -%}
+    </div>
+  {%- endfor -%}
+</div>
+ 
+{%- if section.settings.divider -%}</div>{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.rich-text.name",
+  "class": "index-section",
+  "settings": [
+    {
+      "type":"text",
+      "id":"sec-id",
+      "label":"Section Id"
+    },
+    {
+      "type": "select",
+      "id": "align_text",
+      "label": "t:sections.rich-text.settings.align_text.label",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.rich-text.settings.align_text.options.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.rich-text.settings.align_text.options.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.rich-text.settings.align_text.options.right.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "narrow_column",
+      "label": "t:sections.rich-text.settings.narrow_column.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.rich-text.settings.divider.label",
+      "default": false
+    },
+    {
+    "type": "text",
+    "id": "main_class_rich",
+    "label": "Class Name"
+    }
+
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "t:sections.rich-text.blocks.heading.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.rich-text.blocks.heading.settings.title.label",
+          "default": "Rich text"
+        },
+         {
+          "type": "select",
+          "id": "font_family",
+          "label": "Choose title Font",
+          "options": [
+            {
+              "value": "basiccommercial_lt_lightRg",
+              "label": "Basic Commercial Light"
+            },
+            {
+              "value": "basiccommercial_lt_romanRg",
+              "label": "Basic Commercial Roman"
+            },
+            {
+              "value": "literaheavy",
+              "label": "Litera Heavy"
+            },
+             {
+              "value": "Litera-Regular",
+              "label": "Litera Regular"
+            }
+          ],
+          "default": "basiccommercial_lt_lightRg"
+        },
+      {
+         "type": "range",
+         "id": "f_size",
+         "default": 35,
+         "min": 18,
+         "max": 100,
+         "unit": "px",
+         "label": "title Font Size"
+      },
+         {
+         "type": "color",
+         "id": "f_color",
+         "label": "Add title Font Color",
+         "default": "#ddd"
+      }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.rich-text.blocks.text.name",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "enlarge_text",
+          "label": "t:sections.rich-text.blocks.text.settings.enlarge_text.label",
+          "default": true
+        },
+        {
+          "id": "text",
+          "type": "richtext",
+          "label": "t:sections.rich-text.blocks.text.settings.text.label",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+         {
+         "type": "color",
+         "id": "f_color2",
+         "label": "Add richtext Font Color",
+         "default": "#ddd"
+      },
+      {
+          "type": "select",
+          "id": "font_family2",
+          "label": "Choose richtext Font",
+          "options": [
+            {
+              "value": "basiccommercial_lt_lightRg",
+              "label": "Basic Commercial Light"
+            },
+            {
+              "value": "basiccommercial_lt_romanRg",
+              "label": "Basic Commercial Roman"
+            },
+            {
+              "value": "literaheavy",
+              "label": "Litera Heavy"
+            },
+              {
+              "value": "Litera-Regular",
+              "label": "Litera Regular"
+            }
+          ],
+          "default": "basiccommercial_lt_lightRg"
+        },
+      {
+         "type": "range",
+         "id": "f_size2",
+         "default": 35,
+         "min": 18,
+         "max": 100,
+         "unit": "px",
+         "label": "richtext Font Size"
+      }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "t:sections.rich-text.blocks.button.name",
+      "settings": [
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.rich-text.blocks.button.settings.link.label"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "t:sections.rich-text.blocks.button.settings.link_text.label",
+          "default": "Button"
+        },
+         {
+         "type": "color",
+         "id": "f_color3",
+         "label": "Add button Font Color",
+         "default": "#ddd"
+      },
+      {
+          "type": "select",
+          "id": "font_family3",
+          "label": "Choose button Font",
+          "options": [
+            {
+              "value": "basiccommercial_lt_lightRg",
+              "label": "Basic Commercial Light"
+            },
+            {
+              "value": "basiccommercial_lt_romanRg",
+              "label": "Basic Commercial Roman"
+            },
+            {
+              "value": "literaheavy",
+              "label": "Litera Heavy"
+            },
+              {
+              "value": "Litera-Regular",
+              "label": "Litera Regular"
+            }
+          ],
+          "default": "basiccommercial_lt_lightRg"
+        },
+      {
+         "type": "range",
+         "id": "f_size3",
+         "default": 35,
+         "min": 18,
+         "max": 100,
+         "unit": "px",
+         "label": "button Font Size"
+      }
+      ]
+    },
+    {
+      "type": "page",
+      "name": "t:sections.rich-text.blocks.page.name",
+      "settings": [
+        {
+          "id": "page_text",
+          "type": "page",
+          "label": "t:sections.rich-text.blocks.page.settings.page_text.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.rich-text.presets.rich_text.name",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["custom.popups"]
+  }
+}
+{% endschema %}

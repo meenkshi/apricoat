@@ -1,0 +1,368 @@
+
+{% assign niwclass = '' %}
+{% if product.handle contains 'adventure-pants-men' %}
+   {% assign niwclass = 'adventure-pants-men-black' %}
+  {% elsif product.handle contains 'adventure-pants-women' %}  
+   {% assign niwclass = 'adventure-pants-women-beige' %}
+  {% elsif product.handle contains 'ecodown-jacket-men' %}
+  {% assign niwclass = 'ecodown-jacket-men-yellow' %}
+     {% elsif product.handle contains 'ecodown-jacket-women' or  product.handle contains 'glacier-jacket-limited-edition'%}
+  {% assign niwclass = 'ecodown-jacket-women-gray' %}
+   {% elsif product.handle contains 'women-quickdry-ls-shirt' %}
+  {% assign niwclass = ' women-quickdry-ls-shirt-gray' %}
+   {% elsif product.handle contains 'men-quickdry-ls-shirt' %}
+  {% assign niwclass = 'men-quickdry-ls-shirt-gray' %}
+  
+ {% elsif product.handle contains 'men-quickdry-shirt' %}
+  {% assign niwclass = ' men-quickdry-shirt-gray' %}
+  {% elsif product.handle contains 'adventure-2-0-men' %}
+  {% assign niwclass = ' adventure-2-0-men-navy-blue' %}
+  {% elsif product.handle contains 'adventure-2-0-women' %}
+  {% assign niwclass = ' adventure-2-0-women-pink' %}
+  
+{% else %}
+ {% assign niwclass = product.handle | downcase | replace:' ','-'  %}
+{% endif %}
+<section class="slide_image {{ niwclass }}" id="range-slider-section">
+   
+  <div class="slider-data ">
+  <div class="slider-data-overlay"></div>
+    {% if product.handle contains 'adventure-2-0-men' %}
+        {% for block in section.blocks %}
+          <div
+            id="block_slider_{{ block.settings.number | remove:'number'}}"
+            class="number_block_slider"
+          >
+           <div class="main-slider-content carousel  carousel--full-width" >
+              {% assign instructions = block.settings %}
+              {% for i in (1..7) %}
+                {% assign description = 'description_' | append: i %}
+                {% assign image = 'image_' | append: i %}
+                {% if instructions[description] != blank or instructions[image] != blank %}
+                 <div class="carousel-cell">
+                   <div class="content_wrapper" data-indes="{{ i }}" data-slide-no="no-{{ block.settings.number  | remove:'number' }}-{{ i }}">    
+                 <div class="close">
+                   <img src="{{ 'close.svg' | asset_url }}">
+                 </div>
+                    {% if instructions[description] != blank %}
+                      <div class="base-content">{{ instructions[description] }}</div>
+                    {% endif %}
+                    {% if instructions[image] != blank %}
+                      <div><img src="{{ instructions[image] | img_url:'master' }}"></div>
+                    {% endif %}
+                   </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+       {% for slide in (1..8) %}
+          <div
+            id="block_slider_{{slide}}"
+            class="number_block_slider"
+          >
+         
+           <div class="main-slider-content carousel  carousel--full-width" >
+              {% assign instructions = product.metafields.custom %}
+              {% for i in (1..7) %} 
+                {%  if i == 7 %} 
+                   {% assign fmslide = '_features_slide' | append: slide %} 
+                   {% assign fimage = fmslide | append: '_image' | append: i %}       
+               {% else %} 
+                  {% assign fmslide = 'features_slide' | append: slide %}  
+                  {% assign fimage = fmslide | append: '_image' | append: i %}     
+                  {% endif %}
+                {% assign fslide = 'features_slide' | append: slide %}  
+               
+                {% assign fdescription = fslide | append: '_description' | append: i %}                          
+                
+            
+                {% if instructions[fdescription] != blank or instructions[fimage] != blank %}
+                   
+                 <div class="carousel-cell">
+                   <div class="content_wrapper" data-indes="{{ i }}" data-slide-no="no-{{ slide }}-{{ i }}">    
+                 <div class="close">
+                   <img src="{{ 'close.svg' | asset_url }}">
+                 </div>
+                    {% if instructions[fdescription] != blank %}
+                      <div class="base-content">{{ instructions[fdescription] | metafield_tag }}</div>
+                    {% endif %}
+                    {% if instructions[fimage] != blank %}
+                      <div><img src="{{ instructions[fimage] | img_url:'master' }}"></div>
+                    {% endif %}
+                   </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  
+  
+  <div class="wrapper">
+    {% if  product.metafields.custom.range_total_slide_value !=blank  %}
+    <div class="content">
+      <h5>{{ section.settings.title }}</h5>
+      <p>{{ section.settings.description }}</p>    
+    </div>
+    {% endif %}
+    <div class="range_wrapper">
+    
+        {% if product.handle contains 'adventure-2-0-men' %}
+            <div class="iamges">
+        {% for block in section.blocks %}
+          <div class="image_wrapper" data-id="block_slider_{{ forloop.index }}">
+            <img
+              data-index="{{ forloop.index }}"
+              class="product_image "
+              src="{{ block.settings.image | img_url:'master' }}"
+            >
+            <div
+              class="block_list uper--{{ forloop.index }}"
+              data-index="{{ forloop.index }}"
+            
+            >
+              {% assign findex = forloop.index  %}
+              {% assign dots = block.settings.dots %}
+              {% for i in (1..dots) %}
+                <button
+                  class="block_numbers block_slider_{{ i }} product-details__point"
+                  data-index="{{ i }}"
+                  data-slide-no="no-{{ findex }}-{{ i }}"
+                >
+                  <span class="product-details__circle product-details__circle--animated"></span>
+                </button>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+            </div>
+       {% else %}
+          {% if product.metafields.custom.range_total_slide_value !=blank %}
+  <div class="iamges">   
+           {% assign instructions =  product.metafields.custom %}        
+{% for i in (1..8) %}
+{% assign image = 'features_img' | append:i %}
+{% assign dots = 'features_dots' | append:i %}
+  {% assign ano = '' %}
+{% if instructions[image] != blank and instructions[dots] != blank %}
+<div class="image_wrapper" data-id="block_slider_{{ forloop.index }}"> 
+  <img
+              data-index="{{ forloop.index }}"
+              class="product_image"
+              src="{{ instructions[image] | img_url: 'master'}}"
+            >
+            <div
+              class="block_list uper--{{ forloop.index }}"
+              data-index="{{ forloop.index }}"
+            > 
+              {% assign findex = forloop.index  %}          
+              {% for i in (1..instructions[dots]) %}
+                <button
+                  class="block_numbers block_slider_{{ i }} product-details__point"
+                  data-index="{{ i }}"
+                  data-slide-no="no-{{findex }}-{{ i }}"
+                >
+                  <span class="product-details__circle product-details__circle--animated"></span>
+                </button>
+              {% endfor %}
+            </div>
+          </div>
+{% endif %}
+{% endfor %}
+  </div>
+                      
+    {% endif %} 
+    {% endif %}      
+     
+      {% if product.metafields.custom.range_total_slide_value !=blank %}
+      <div class="range-slider-details">
+        <div class="range-slider">
+          <input class="range-slider__range" type="range" value="{% if product.metafields.custom.range_total_slide_value !=blank %}{{ product.metafields.custom.range_total_slide_value }}{% else %}5{% endif %}" min="1" max="{{ product.metafields.custom.range_total_slide_number }}">
+        </div>
+      </div>
+        {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Slide Range",
+  "class":"slider--range",
+  "settings": [
+           {
+             "type": "text",
+             "id": "title",
+             "label": "Add Title"
+            },
+            {
+             "type": "text",
+             "id": "description",
+             "label": "Add Description"
+            }
+  ],
+  "blocks": [
+     {
+       "type": "testimonial",
+       "name": "Slide",
+       "limit":8,
+       "settings": [
+                     {
+                      "type": "image_picker",
+                      "id": "image",
+                      "label": "Add Image"
+                      },
+            {
+          "type":"select",
+           "id":"number",
+           "label":"Select Slide Number",
+           "options":[
+             {
+               "value":"number1",
+               "label":"Number 1"
+             },
+             {
+               "value":"number2",
+               "label":"Number 2"
+             },
+             {
+               "value":"number3",
+               "label":"Number 3"
+             },
+              {
+               "value":"number4",
+               "label":"Number 4"
+             },
+             {
+               "value":"number5",
+               "label":"Number 5"
+             },
+             {
+               "value":"number6",
+               "label":"Number 6"
+             },
+              {
+               "value":"number7",
+               "label":"Number 7"
+             },
+              {
+               "value":"number8",
+               "label":"Number 8"
+             }
+
+
+           ]
+         },
+          {
+          "type":"select",
+           "id":"dots",
+           "label":"Select Dots",
+           "options":[
+             {
+               "value":"1",
+               "label":"Dot 1"
+             },
+             {
+               "value":"2",
+               "label":"Dot 2"
+             },
+             {
+               "value":"3",
+               "label":"Dot 3"
+             },
+              {
+               "value":"4",
+               "label":"Dot 4"
+             },
+             {
+               "value":"5",
+               "label":"Dot 5"
+             },
+             {
+               "value":"6",
+               "label":"Dot 6"
+             },
+              {
+               "value":"7",
+               "label":"Dot 7"
+             }
+           ]
+         },
+    {
+              "type":"header",
+              "content":"Slider Data"
+            }, {
+                      "type": "image_picker",
+                      "id": "image_1",
+                      "label": "Add Image One"
+                      },
+         {
+             "type": "richtext",
+             "id": "description_1",
+             "label": "Add Description One"
+            },
+         {
+                      "type": "image_picker",
+                      "id": "image_2",
+                      "label": "Add Image Two"
+                      },
+         {
+             "type": "richtext",
+             "id": "description_2",
+             "label": "Add Description Two"
+            },
+         {
+                      "type": "image_picker",
+                      "id": "image_3",
+                      "label": "Add Image Three"
+                      },
+         {
+             "type": "richtext",
+             "id": "description_3",
+             "label": "Add Description Three"
+            },
+         {
+                      "type": "image_picker",
+                      "id": "image_4",
+                      "label": "Add Image Four"
+                      },
+         {
+             "type": "richtext",
+             "id": "description_4",
+             "label": "Add Description Four"
+            },
+         {
+                      "type": "image_picker",
+                      "id": "image_5",
+                      "label": "Add Image Five"
+                      },
+         {
+             "type": "richtext",
+             "id": "description_5",
+             "label": "Add Description Five"
+            },
+         {
+                      "type": "image_picker",
+                      "id": "image_6",
+                      "label": "Add Image Six"
+                      },
+         {
+             "type": "richtext",
+             "id": "description_6",
+             "label": "Add Description Six"
+            }
+                   ]
+     }
+   ],
+  "presets":[
+    {
+    "name":"Slide Range"
+    }
+  ]
+}
+{% endschema %}
