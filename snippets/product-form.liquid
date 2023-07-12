@@ -22,7 +22,7 @@
         assign button_text = 'products.product.sold_out' | t
       endunless
     -%}
- <span class="size_tooltip">Choose your size first</span>
+<span class="size_tooltip">Choose your size first</span>
       <span class=size_btn_overlap></span>
     <button
       {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}

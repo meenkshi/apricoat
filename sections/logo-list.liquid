@@ -3,8 +3,8 @@
   opacity: {{ section.settings.logo_opacity | divided_by: 100.0 }};
 }
 {%- endstyle -%}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
+  <link rel="stylesheet" data-href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
+  <link rel="stylesheet" data-href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
 {%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
 
 <div class="page-width" data-aos="logo__animation">
@@ -46,12 +46,12 @@
 
 
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" ></script>
+  <script type="lazyload_int" data-src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script type="lazyload_int" data-src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
+  <script type="lazyload_int" data-src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
 
-    <script type="text/javascript">
+<script type="lazyload_int">
     $(document).ready(function(){
       $('.logo-bar').slick({
        slidesToShow: 5,

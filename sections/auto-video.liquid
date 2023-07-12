@@ -16,14 +16,14 @@
           class="video-div desktop-videos  {% if section.settings.mobile_video_url == blank %}show_desktop {% endif %}"
           data-type="mp4"
           src="{{ section.settings.video_url }}"
-          loop muted playsinline autoplay></video>
+          loop muted playsinline preload="none"></video>
    
      <video
           id="Mp4Video-{{ section.id }}"
           class="video-div mobile-videos"
           data-type="mp4"
           src="{{ section.settings.mobile_video_url }}"
-          loop muted playsinline autoplay></video>
+          loop muted playsinline preload="none"></video>
       {%- endif -%}
    
      

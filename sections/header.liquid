@@ -27,7 +27,7 @@
   if template_name contains 'collection' and collection.image and section.settings.sticky_collection
     assign overlay_header = true
   endif
-  if  page.handle == 'about-us' or page.handle == 'sustainability' or  template.suffix == 'crowdfunding'
+  if  page.metafields.custom.body_class != blank
   assign overlay_header = true
   endif
 -%}

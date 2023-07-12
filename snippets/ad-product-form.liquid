@@ -22,8 +22,8 @@
         assign button_text = 'products.product.sold_out' | t
       endunless
     -%}
- <span class="size_tooltip">Choose your size first</span>
-      <span class=size_btn_overlap></span> 
+<span class="size_tooltip">Choose your size first</span>
+      <span class=size_btn_overlap></span>
     <button type="button"     
       class="btn btn--full add-to-cart{% if enable_dynamic_buttons and product.selling_plan_groups == empty %} btn--secondary{% endif %}"
       {% unless current_variant.available %} disabled="disabled"{% endunless %}>

@@ -1,4 +1,4 @@
-{{ 'menu-mobile.css' | asset_url | stylesheet_tag: preload: true }}
+<link rel="stylesheet" data-href="{{ 'menu-mobile.css' | asset_url }}" >
 {%- assign animation_row = 1 -%}
 {%- assign drawer_position = 'right' -%}
 {% if logo_alignment == 'center' %}

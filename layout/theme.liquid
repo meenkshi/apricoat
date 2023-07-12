@@ -1,9 +1,10 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction }}">
   <head>
+{% render 'wnw_header' %}    
 <link rel='preconnect dns-prefetch' href='https://triplewhale-pixel.web.app/' crossorigin />
 <link rel='preconnect dns-prefetch' href='https://api.config-security.com/' crossorigin />
-<script>
+<script type="lazyload_int">
 /* >> TriplePixel :: start*/
 ~function(W,H,A,L,E,_,B,N){function O(U,T,H,R){void 0===R&&(R=!1),H=new XMLHttpRequest,H.open("GET",U,!0),H.send(null),H.onreadystatechange=function(){4===H.readyState&&200===H.status?(R=H.responseText,U.includes(".txt")?eval(R):N[B]=R):(299<H.status||H.status<200)&&T&&!R&&(R=!0,O(U,T-1))}}if(N=window,!N[H+"sn"]){N[H+"sn"]=1;try{A.setItem(H,1+(0|A.getItem(H)||0)),(E=JSON.parse(A.getItem(H+"U")||"[]")).push(location.href),A.setItem(H+"U",JSON.stringify(E))}catch(e){}A.getItem('"!nC`')||(A=N,A[H]||(L=function(){return Date.now().toString(36)+"_"+Math.random().toString(36)},E=A[H]=function(t,e){return W=L(),(E._q=E._q||[]).push([W,t,e]),W},E.ch=W,B="configSecurityConfModel",N[B]=1,O("//conf.config-security.com/model",0),O("//triplewhale-pixel.web.app/triplefw.txt?",5)))}}("","TriplePixel",localStorage);
 /* << TriplePixel :: end*/
@@ -24,10 +25,10 @@
 <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"> -->
   
-  <link rel="stylesheet" href="{{ 'slick.min.css' | asset_url }}" >
-    <link rel="stylesheet" href="{{ 'slick-theme.min.css' | asset_url}}" >
+  <link rel="stylesheet" data-href="{{ 'slick.min.css' | asset_url }}" >
+    <link rel="stylesheet" data-href="{{ 'slick-theme.min.css' | asset_url}}" >
   
-    <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}">
+    <link rel="stylesheet" data-href="{{ 'swiper-bundle.min.css' | asset_url }}">
     {%- if settings.favicon != blank -%}
       <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
     {%- endif -%}
@@ -37,12 +38,16 @@
     {%- endif -%}
     {%- render 'social-meta-tags' -%}
     {%- render 'font-face' -%}
-    {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+    
+    {%- render 'theme-css' -%}
+    {%- render 'theme-css2' -%}
+    <link rel="stylesheet" data-href="{{ 'theme.css' | asset_url }}" >
     {%- render 'css-variables' -%}
-    {{ 'stylesheet.css' | asset_url | stylesheet_tag: preload: true }}
-    {{ 'global.css' | asset_url | stylesheet_tag: preload: true }}
-    {{ 'collection-tab.css' | asset_url | stylesheet_tag: preload: true }}
-    {{ 'text-with-icon.css' | asset_url | stylesheet_tag: preload: true }}
+    <link rel="stylesheet" data-href="{{ 'stylesheet.css' | asset_url }}" >
+    <link rel="stylesheet" data-href="{{ 'global.css' | asset_url }}" >
+    <link rel="stylesheet" data-href="{{ 'collection-tab.css' | asset_url }}" >
+    <link rel="stylesheet" data-href="{{ 'text-with-icon.css' | asset_url }}" >
+
     <script>
       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
       window.theme = window.theme || {};
@@ -89,15 +94,24 @@
         themeVersion: "7.2.0"
       };
     </script>
-    {{ content_for_header }}
-    <script type="text/javascript"  src="{{ 'vendor-scripts-v11.js' | asset_url | split: '?' | first }}" defer="defer"></script>
-    {%- if shop.enabled_currencies.size > 1 -%}
-      <link rel="stylesheet" href="{{ 'country-flags.css' | asset_url | split: '?' | first }}">
+    
+    {%- if request.design_mode or template contains 'cart' or template contains 'checkout' -%}
+            {{ content_for_header }}
+    {%- else -%}
+            {% capture content_for_header2 %}{{ content_for_header }}{% endcapture %}
+            {{ content_for_header2 | replace: ' defer="defer" ', ' type="lazyload_int" ' | replace: " src=", " data-src="| replace: "DOMContentLoaded", "w3-DOMContentLoaded" | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('w3-DOMContentLoaded', asyncLoad, false);" | replace: "addEventListener('load', prefetchAssets);", "addEventListener('w3-DOMContentLoaded', prefetchAssets);" }}
+            <script>var trekkie=[];trekkie.integrations=!0;window.BOOMR={},window.BOOMR.version=true;</script>
     {%- endif -%}
-    <script type="text/javascript"  src="{{ 'jquery-3.6.3.min.js' | asset_url }}" ></script>
-    <script type="text/javascript"  src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
-    <script type="text/javascript"  src="{{ 'menu-mobile.js' | asset_url }}" defer="defer"></script>
-    <script type="text/javascript"  src="{{ 'swiper-bundle.min.js' |asset_url }}" defer="defer"></script>
+    
+    <script type="lazyload_int" data-src="{{ 'vendor-scripts-v11.js' | asset_url | split: '?' | first }}"></script>
+    {%- if shop.enabled_currencies.size > 1 -%}
+      <link rel="stylesheet" data-href="{{ 'country-flags.css' | asset_url | split: '?' | first }}">
+    {%- endif -%}
+    <script type="lazyload_int" data-src="{{ 'jquery-3.6.3.min.js' | asset_url }}"></script>
+    <script type="lazyload_int" data-src="{{ 'theme.js' | asset_url }}"></script>
+    <script type="lazyload_int" data-src="{{ 'menu-mobile.js' | asset_url }}"></script>
+    <script type="lazyload_int" data-src="{{ 'swiper-bundle.min.js' |asset_url }}"></script>
+    
     {%- if request.page_type contains 'customers/' -%}
       <script src="{{ 'shopify_common.js' | shopify_asset_url  }}" defer="defer"></script>
     {%- endif -%}
@@ -131,28 +145,29 @@ src: url(https://cdn.shopify.com/s/files/1/0055/1865/5558/files/Litera_Italic.tt
     </style>  
 {% render 'gsf-conversion-pixels' %}
 
-  <script type="text/javascript">
+  <script type="lazyload_int">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "hhdhuv3arr");
 </script>
-<link rel="stylesheet" href="{{ 'flickity.min.css' | asset_url}}">
-<script type="text/javascript" src="{{ 'flickity.pkgd.min.js' |asset_url }}" defer=""></script>
-<script type="text/javascript"  src="{{ 'stopExecutionOnTimeout.js' | asset_url }}" defer=""></script>
-<script type="text/javascript"  src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+<link rel="stylesheet" data-href="{{ 'flickity.min.css' | asset_url}}">
+<script type="lazyload_int" data-src="{{ 'flickity.pkgd.min.js' |asset_url }}"></script>
+<script type="lazyload_int" data-src="{{ 'stopExecutionOnTimeout.js' | asset_url }}"></script>
+<script type="lazyload_int" data-src="{{ 'custom.js' | asset_url }}"></script>
   <!-- Google Optimize -->
-  <script async src="https://www.googleoptimize.com/optimize.js?id=OPT-N3X6S6M"></script>
-  
+  <script type="lazyload_int" data-src="https://www.googleoptimize.com/optimize.js?id=OPT-N3X6S6M"></script>
+  {% render 'custom-css' %}
+  {% render 'app-block' %}
 </head>
   {% assign pro-template = '' %}
   {% if template.name == 'product' or template.suffix == 'dryfit-shirts' or template.suffix == 'adventure-2.0-new' or template.suffix == 'adv-pants-prepublish' or template.suffix == 'down-women' or template.suffix == 'down-men' or template.suffix == 'glacier' or product.handle contains 'adventure-2-0' or template.suffix == 'adv2-women' %}
     {% assign pro-template = 'product_adventure-2_0-new' %}
     {% endif %}
   <body
-    class="{% if page.handle == 'about-us' or  page.handle == 'sustainability' or  template.suffix == 'crowdfunding' %}template-index {% else %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% endif %} {% if request.path == '/challenge' %} template-challange{% endif %}
-    {% if pro-template == ''  %}{{ template | replace: '.', '_' | handelize }} {% else %}{{ pro-template}}{% endif %} {% unless template.name == 'index' or page.handle == 'about-us' or  page.handle == 'sustainability' or  template.suffix == 'crowdfunding'%}template-inner{% endunless %}"
+    class="{% unless template.name == 'index' %}{% if page.metafields.custom.body_class != blank %} {{ page.metafields.custom.body_class }} {% else %} template-inner {% endif %} {% endunless %} template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} {% if request.path == '/challenge' %} template-challange{% endif %}
+    {% if pro-template == ''  %}{{ template | replace: '.', '_' | handelize }} {% else %}{{ pro-template}}{% endif %}  "
     data-center-text="{{ settings.type_body_align_text }}"templar
     data-button_style="{{ settings.button_style }}"
     data-type_header_capitalize="{{ settings.type_header_capitalize }}"
@@ -175,7 +190,12 @@ src: url(https://cdn.shopify.com/s/files/1/0055/1865/5558/files/Litera_Italic.tt
       </div>
         {%- sections 'popup-group' -%}
         <main class="main-content" id="MainContent">
-          {{ content_for_layout }}
+          {%- if request.design_mode or template contains 'cart' or template contains 'checkout' -%}
+            	{{ content_for_layout }}
+            {%- else -%}
+            	{% capture content_for_layout2 %}{{ content_for_layout }}{% endcapture %}
+            	{{ content_for_layout2 | replace: '<iframe src="', '<iframelazy data-class="LazyLoad" data-src="' | replace: '</iframe>', '</iframelazy>'  }}
+            {%- endif -%}
         </main>
         {%- sections 'footer-group' -%}
       </div>
@@ -199,8 +219,8 @@ src: url(https://cdn.shopify.com/s/files/1/0055/1865/5558/files/Litera_Italic.tt
     <template id="articleImageMarkup">
       <img width="" height="" src loading="lazy" alt=""/>
     </template>
-    <script src="{{ 'jquery.smooth-scroll.min.js' | asset_url }}" defer=""></script>
-    <script type="text/javascript">  
+    <script type="lazyload_int" data-src="{{ 'jquery.smooth-scroll.min.js' | asset_url }}"></script>
+    <script type="lazyload_int">  
       {% comment %}
       // Hide header on scroll down
 var didScroll;
@@ -303,7 +323,7 @@ function hasScrolled() {
     </script>
 
     {% if template.name == 'product' or  template.name == 'collection' %}
-     <script type="text/javascript" src="https://scripts.selectika.com/selectika-wc.js" defer=""></script>
+     <script type="lazyload_int" data-src="https://scripts.selectika.com/selectika-wc.js"></script>
       {% endif %}
     
   {% include 'adroll' %}
@@ -364,7 +384,31 @@ qsa.apply(document,['body']);
 </script>
 
 {% endif %}
-    
 
+<script type="lazyload_int">
+		setTimeout(function() {
+            var lazyVideos = document.querySelectorAll("video");
+            lazyVideos.forEach(function(lazyVid) {
+              lazyVid.load();
+              lazyVid.muted= true;
+              lazyVid.play();
+            });
+		});
+</script>
+
+<script>
+      	var site_nav_link_burger = true;
+      	document.addEventListener("DOMContentLoaded", function() {
+            var icon_menu = document.querySelector("button.site-nav__link.js-drawer-open-nav.mobile-sidebar");
+            icon_menu.addEventListener("click", function() {
+      			if(site_nav_link_burger) {
+      				event.preventDefault();
+      				site_nav_link_burger = false;
+      			}
+      		});
+      	})
+      </script>
+    
+{% render 'wnw_footer' %}  
 </body>
 </html>

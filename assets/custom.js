@@ -293,7 +293,7 @@ debugger;
              detail: cartData
         })); 
    });
-   }, 600); 
+   }, 400); 
   });
 
     $('.size_tooltip').on("click", function (e) {

@@ -16,7 +16,7 @@
 
   --colorTextBody:#1c1d1d;
   --colorPrice:#1c1d1d;
-  --colorComparePrice:#1c1d1d;
+  --colorComparePrice:#b0adad;
   --colorTextSavings:#5fcc26;
   --colorSaleTag:#18c29c;
   --colorSaleTagText:#ffffff;
@@ -3926,14 +3926,14 @@ input[type=image]{
 
 select{
   background-position:100%;
-  background-image:url(//cdn.shopify.com/s/files/1/0055/1865/5558/t/105/assets/ico-select.svg);
+  background-image:url(//cdn.shopify.com/s/files/1/0055/1865/5558/t/106/assets/ico-select.svg);
   background-repeat:no-repeat;
   background-position:right 10px center;
   background-size:11px
 }
 
 .is-light select{
-    background-image:url(//cdn.shopify.com/s/files/1/0055/1865/5558/t/105/assets/ico-select-white.svg)
+    background-image:url(//cdn.shopify.com/s/files/1/0055/1865/5558/t/106/assets/ico-select-white.svg)
 }
 
 .faux-select .icon{
@@ -5200,7 +5200,7 @@ form+.footer__social{
     }
 
 .site-footer select{
-    background-image:url(//cdn.shopify.com/s/files/1/0055/1865/5558/t/105/assets/ico-select-footer.svg);
+    background-image:url(//cdn.shopify.com/s/files/1/0055/1865/5558/t/106/assets/ico-select-footer.svg);
   }
 
 [data-center-text=true] .payment-icons{

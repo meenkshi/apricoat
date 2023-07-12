@@ -42,13 +42,13 @@
                  <div class="carousel-cell">
                    <div class="content_wrapper" data-indes="{{ i }}" data-slide-no="no-{{ block.settings.number  | remove:'number' }}-{{ i }}">    
                  <div class="close">
-                   <img src="{{ 'close.svg' | asset_url }}">
+                   <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ 'close.svg' | asset_url }}">
                  </div>
                     {% if instructions[description] != blank %}
                       <div class="base-content">{{ instructions[description] }}</div>
                     {% endif %}
                     {% if instructions[image] != blank %}
-                      <div><img src="{{ instructions[image] | img_url:'master' }}"></div>
+                      <div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ instructions[image] | img_url:'master' }}"></div>
                     {% endif %}
                    </div>
                   </div>
@@ -84,13 +84,13 @@
                  <div class="carousel-cell">
                    <div class="content_wrapper" data-indes="{{ i }}" data-slide-no="no-{{ slide }}-{{ i }}">    
                  <div class="close">
-                   <img src="{{ 'close.svg' | asset_url }}">
+                   <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ 'close.svg' | asset_url }}">
                  </div>
                     {% if instructions[fdescription] != blank %}
                       <div class="base-content">{{ instructions[fdescription] | metafield_tag }}</div>
                     {% endif %}
                     {% if instructions[fimage] != blank %}
-                      <div><img src="{{ instructions[fimage] | img_url:'master' }}"></div>
+                      <div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ instructions[fimage] | img_url:'master' }}"></div>
                     {% endif %}
                    </div>
                   </div>
@@ -119,7 +119,7 @@
             <img
               data-index="{{ forloop.index }}"
               class="product_image "
-              src="{{ block.settings.image | img_url:'master' }}"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ block.settings.image | img_url:'master' }}"
             >
             <div
               class="block_list uper--{{ forloop.index }}"
@@ -154,7 +154,7 @@
   <img
               data-index="{{ forloop.index }}"
               class="product_image"
-              src="{{ instructions[image] | img_url: 'master'}}"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ instructions[image] | img_url: 'master'}}"
             >
             <div
               class="block_list uper--{{ forloop.index }}"

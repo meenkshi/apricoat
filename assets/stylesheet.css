@@ -157,10 +157,13 @@ p.demo {
 .adventure-product-section .product__price {
   font-weight: 400;
   text-align: center;
-/*   color: #c21818; */
+/*   color: #1c1d1d; */
   font-family: basiccommercial_lt_lightRg;
 }
-.adventure-product-section .product__price.product__price--compare,
+/* .adventure-product-section .product__price.product__price--compare,
+.our-technology-section .rte-setting a {
+  color: #b0adad;
+} */
 .our-technology-section .rte-setting a {
   color: #b0adad;
 }
@@ -886,7 +889,7 @@ div#NavDrawer2 {
     text-align: right;
   }
   .adventure-product-section .product-header .site-nav__link {
-    margin-left: 40px;
+    margin-left: 20px;
   }
   .adventure-product-section
     .product-header
@@ -5817,7 +5820,7 @@ body.scroll-up #SiteHeader {
   top: 0;
   z-index: 11111;
   transition: transform 0.3s ease-in-out;
-  will-change: transform;
+/*   will-change: transform; */
   height: 0;
 }
 .scroll-up .header-group-main {
@@ -5859,11 +5862,7 @@ body.scroll-up #SiteHeader {
 .scroll-down .product-header.stick {
   top: 0;
 }
-.js-drawer-open .header-group-main {
-  will-change: auto;
-  height: auto;
-  transform: none;
-}
+
 html {
   scroll-behavior: smooth;
 }
@@ -6257,6 +6256,9 @@ button.video-modal__close-btn svg path,button.video-modal__close-btn svg rect {
     line-height: 54px!important;
     font-size: 42px!important;
 }
+  .crowdfunding_short_title h2.home_Crowdfunding_title {
+    font-size: 42px !important;
+}
 }
 @media (max-width:991px){
 /* .page_crowdfunding .custom_iwt .feature-row .feature-row__text .h1 {line-height: 31.88px;font-size: 27px !important;}
@@ -6287,6 +6289,9 @@ button.video-modal__close-btn svg path,button.video-modal__close-btn svg rect {
     font-size: 42px!important;
 }
    .video-modal__content .video-wrapper {   padding-bottom: 50%;}
+}
+@media (max-width: 768px){
+    .page_crowdfunding .hero__image {  object-fit: cover;  object-position: inherit;}
 }
 @media (max-width:767px){
 #shopify-section-template--14797953204294__ae857321-6254-455e-a996-874547b35460 .feature-row .feature-row__text .h1 
@@ -6325,7 +6330,7 @@ button.video-modal__close-btn svg path,button.video-modal__close-btn svg rect {
     line-height: 21px;
 }
   .crowdfunding_text_small_block .grid__item {     margin-bottom: 41px; padding-left: 17px;}
-  .crowdfunding_text_small_block .grid { margin-left: -17px;}
+  .crowdfunding_text_small_block .grid { margin-left: -17px;display: flex;    flex-wrap: wrap;}
   .crowdfunding_text_small_block .page-width {  padding: 0 14px;}
   .page_crowdfunding .shopify-section .richtext { font-size: 16px!important;}
   .crowdfunding_text_small_block { padding-bottom: 12px;}
@@ -6339,7 +6344,7 @@ button.video-modal__close-btn svg path,button.video-modal__close-btn svg rect {
   .page_crowdfunding .crowdfunding-img-text-small .crowdfunding_contain {     max-width: 366px;    margin: 0 auto;   margin-top: 0 !important;    display: flex;    flex-direction: column-reverse;    margin-bottom: 34px !important;}
   .page_crowdfunding #shopify-section-template--14797953204294__a51438b0-9e91-4688-81c5-2422e04a938d .feature-row--50 .feature-row__text .rte { font-size: 16px;}
   #shopify-section-template--14797953204294__a51438b0-9e91-4688-81c5-2422e04a938d .feature-row .subheading {    font-size: 20px!important;}
-  .page_crowdfunding .crowdfunding-img-text-small .feature-row--50 .feature-row__text .rte { margin-bottom: 46px;}
+  .page_crowdfunding .crowdfunding-img-text-small .feature-row--50 .feature-row__text .rte { text-align:center; margin-bottom: 46px;}
   #shopify-section-template--14797953204294__8a9fa31d-3646-4cb5-a4d9-5afd9b63ded4 .home_Crowdfunding_title { font-size: 32px;}
   .page_crowdfunding .Crowdfunding_richtext {
     max-width: 362px;
@@ -6361,6 +6366,9 @@ button.video-modal__close-btn svg path,button.video-modal__close-btn svg rect {
     line-height: 30.4px!important;
     font-size: 26px!important;
 }
+.crowdfunding_short_title h2.home_Crowdfunding_title {
+    font-size: 32px !important;
+}
 
  
 }
@@ -6368,8 +6376,25 @@ button.video-modal__close-btn svg path,button.video-modal__close-btn svg rect {
 .page_crowdfunding .subheading.appear-delay-2 {padding: 0 15px;}
 .page_crowdfunding .custom_iwt .feature-row .feature-row__text .h1 {line-height:24.94px !important;font-size: 20px!important;}
 .page_crowdfunding .feature-row .subheading { line-height: 24.94px;  font-size: 20px!important;}
-.page_crowdfunding .crowdfunding_contain { margin-top: 18px !important;margin-bottom: 20px !important;}
+.page_crowdfunding .crowdfunding_contain { margin-top: 18px !important;margin-bottom: 20px !important;margin: 20px 15px !IMPORTANT;}
+
+  .page_crowdfunding .crowdfunding-img-text-small-top .crowdfunding_contain{margin: 20px auto !IMPORTANT;    
+  }
 .template-index.page_crowdfunding .slideshow__slide .hero__title  { line-height: 26.4px !important;font-size:22px!important}
+
+  .adventure-product-section .product-header .product__price, .product-header .size_option_block label.variant__label {
+    font-size: 18px;
+    line-height: 21px;
+}
+  .adventure-product-section .product-header .size_option_block.product-block {
+    width: 80px;
+}
+  .product-header .size_option_block label.variant__label:before {
+    right: 16px;
+}
+  .adventure-product-section .product-header .size_option_block label.variant__label{padding-left:0;    font-size: 16px;}
+
+ 
 }
 @media (max-width:428px){
 .template-index.page_crowdfunding .slideshow__slide .hero__title strong { line-height: 37.41px !important;font-size:32px!important}
@@ -6388,9 +6413,23 @@ button.video-modal__close-btn svg path,button.video-modal__close-btn svg rect {
 .template-index.page_crowdfunding .hero__link {
     margin-top: 38px!important;
 }
+  
+}
+@media (max-width: 410px){
+.adventure-product-section .product-header .size_option_block label.variant__label {
+    padding: 6px 6px 6px 10px;
+    text-align: left;
+}
+  .adventure-product-section .product-header .product__price, .product-header .size_option_block label.variant__label {
+    font-size: 16px;
+    line-height: 21px;
+}
+  .product-header .size_option_block label.variant__label:before {
+    right: 10px;
+}
 }
 @media (max-width: 360px){
-.page_crowdfunding .crowdfunding_contain { margin: 18px 0 30px 0!important;}
+.page_crowdfunding .crowdfunding_contain { margin: 18px 15px 30px !important;}
 .page_crowdfunding .crowdfunding_contain { margin-top: 18px !important;margin-bottom: 30px !important;}
 .page_crowdfunding .custom_iwt .feature-row .feature-row__text .h1 {line-height:24.94px !important;font-size: 20px!important;}
 .page_crowdfunding .feature-row .subheading { line-height: 24.94px;  font-size: 20px!important; font-weight: 400 !important;}
@@ -6398,6 +6437,17 @@ button.video-modal__close-btn svg path,button.video-modal__close-btn svg rect {
     line-height: 32.41px!important;
     font-size: 25px!important;
 }
+  .adventure-product-section .product-header .product__price, .product-header .size_option_block label.variant__label {
+    font-size: 14px;
+    line-height: 21px;
+}
+  .adventure-product-section .product-header .size_option_block.product-block {
+    width: 65px;
+}
+  .adventure-product-section .product-header .size_option_block label.variant__label {
+   font-size: 14px;
+}
+  .adventure-product-section .product__price{margin-right:2px;}
 }
 @media only screen and (min-device-width: 320px) 
                    and (max-device-width: 990px) 
@@ -6408,20 +6458,14 @@ button.video-modal__close-btn svg path,button.video-modal__close-btn svg rect {
 }
 
 /********/
-.js-drawer-open .product-section.adventure-product-section {
+/* .js-drawer-open .product-section.adventure-product-section {
     padding-top: 0;
 }
 .js-drawer-open .product-header {
    transform: translateY(0px);
 }
-.go1808179238 {
-    margin-left: calc(50% - 51vw) !important;
-}
-
-@media (max-width: 991px){
-.go1808179238 {
-    width: auto !important;
-    max-width: inherit !important;
-    padding-left: 15px;
-}
-}
+.js-drawer-open .header-group-main {
+  will-change: auto;
+  height: auto;
+  transform: none;
+} */
